@@ -3215,15 +3215,15 @@ async function sendReservationToTelegram(product, formData) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
     
     try {
-        // ⭐ التغيير المهم هنا: استخدام رابط Vercel بدلاً من التوكن المباشر
-        const response = await fetch('https://your-project-name.vercel.app/api/telegram', {
+        // ✅ استخدم رابط Vercel الصحيح (بدل your-project-name بالاسم الحقيقي)
+        const response = await fetch('https://dentavio.vercel.app/api/telegram', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                message: telegramMessage,
-                chatId: TELEGRAM_CHAT_ID  // إذا كان معرف المحادثة موجوداً
+                message: telegramMessage
+                // ⭐ لا ترسل chatId هنا، سيتم استخدام DEFAULT_CHAT_ID من Vercel
             })
         });
         
@@ -3235,12 +3235,13 @@ async function sendReservationToTelegram(product, formData) {
             closeProductModal();
             
         } else {
-            throw new Error(data.description || 'خطأ في الإرسال');
+            console.error('Telegram error:', data);
+            messageManager.error('حدث خطأ في الإرسال: ' + (data.description || 'خطأ غير معروف'));
         }
         
     } catch (error) {
         console.error('Error sending message:', error);
-        messageManager.error('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر وسائل التواصل المتاحة.');
+        messageManager.error('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى');
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال طلب الحجز';
