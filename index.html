@@ -2823,8 +2823,8 @@
         const editShareLocationBtn = document.getElementById('edit-share-location-btn');
 
         // إعدادات بوت تيليجرام
-        const TELEGRAM_BOT_TOKEN = '8371813863:AAGI4_1XiGe9n_zRp6Dc9RZSZ7h1elczRZ4';
-        const TELEGRAM_CHAT_ID = '-1002507750343';
+        // const TELEGRAM_BOT_TOKEN = '8371813863:AAGI4_1XiGe9n_zRp6Dc9RZSZ7h1elczRZ4';
+        // const TELEGRAM_CHAT_ID = '-1002507750343';
 
         // مفاتيح حفظ البيانات في localStorage
         const USER_DATA_KEY = 'dentavio_user_data';
@@ -3192,7 +3192,6 @@ async function sendReservationToTelegram(product, formData) {
 💰 *السعر:* ${product.price}
     `;
     
-    // ⬇️ هذا هو السطر المعدل - استبدال الرابط الطويل بنص قابل للنقر
     telegramMessage += `\n📱 *رابط التواصل عبر واتساب:* [اضغط للتواصل عبر واتساب](${whatsappLink})\n`;
     
     // إضافة معلومات التوصيل إذا كانت متوفرة
@@ -3202,35 +3201,35 @@ async function sendReservationToTelegram(product, formData) {
     
     // إضافة معلومات الدفع إذا كانت متوفرة
     if (formData.paymentOption && formData.paymentName) {
-        telegramMessage += `💳 *اسم الدافع في شام كاش:* ${formData.paymentName}\n(( ✅✅تم الدفع)): \n يرجى التأكد من استلام ${product.price}\n\n`;
+        telegramMessage += `💳 *اسم الدافع في شام كاش:* ${formData.paymentName}\n✅ *تم الدفع*: يرجى التأكد من استلام ${product.price}\n\n`;
     }
     else {
-        telegramMessage += `💳 *اسم الدافع في شام كاش:*----\n❌❌ لم يتم الدفع بعد\n\n`;
+        telegramMessage += `💳 *اسم الدافع في شام كاش:* ----\n❌ *لم يتم الدفع بعد*\n\n`;
     }
     
     // إضافة الملاحظات
     telegramMessage += `📝 *الملاحظات:* ${formData.clientNotes || 'لا توجد ملاحظات'}\n\n`;
-    
     telegramMessage += `⏰ *الوقت:* ${new Date().toLocaleString('ar-SA')}`;
     
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
     
     try {
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        // ⭐ التغيير المهم هنا: استخدام رابط Vercel بدلاً من التوكن المباشر
+        const response = await fetch('https://your-project-name.vercel.app/api/telegram', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: telegramMessage,
-                parse_mode: 'Markdown'
+                message: telegramMessage,
+                chatId: TELEGRAM_CHAT_ID  // إذا كان معرف المحادثة موجوداً
             })
         });
         
         const data = await response.json();
         
+        // التحقق من نجاح الإرسال
         if (response.ok && data.ok) {
             messageManager.success('تم إرسال طلب الحجز بنجاح! سنتواصل معك قريبًا.');
             closeProductModal();
@@ -3240,7 +3239,7 @@ async function sendReservationToTelegram(product, formData) {
         }
         
     } catch (error) {
-        console.error('Error sending message to Telegram:', error);
+        console.error('Error sending message:', error);
         messageManager.error('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر وسائل التواصل المتاحة.');
     } finally {
         submitBtn.disabled = false;
