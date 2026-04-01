@@ -64,7 +64,7 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             cursor: pointer;
         }
 
@@ -73,7 +73,7 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary);
+            border: 1px solid var(--primary);
         }
 
         .logo-text {
@@ -339,11 +339,6 @@
             margin-bottom: 10px;
         }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
 
         .product-card {
             background: var(--glass-bg);
@@ -685,7 +680,6 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.8rem; }
-            .products-grid { grid-template-columns: 1fr; }
             .filters-grid { flex-direction: column; }
         }
         /* تحسينات إضافية للشاشات الصغيرة */
@@ -1862,6 +1856,152 @@ html {
     }
 }
 
+/* إضافة خيارات التحكم في عرض المنتجات */
+.view-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.view-controls label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.grid-control {
+    display: flex;
+    gap: 8px;
+}
+
+.grid-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.grid-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.grid-btn:hover {
+    background: rgba(16, 185, 129, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ===== التحكم في عدد الأعمدة ===== */
+.products-grid {
+    display: grid;
+    gap: 20px;
+    transition: all 0.3s ease;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* ===== استجابة للشاشات المختلفة ===== */
+/* للشاشات المتوسطة (تابلت) */
+@media (max-width: 992px) {
+    .products-grid.cols-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* للشاشات الصغيرة (هواتف كبيرة) */
+@media (max-width: 768px) {
+    .products-grid.cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid.cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid.cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid {
+        gap: 12px;
+    }
+    
+    /* تقليل ارتفاع الكرت */
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-info {
+        padding: 12px;
+    }
+    
+    .product-name {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    
+    .product-price {
+        font-size: 1.1rem;
+        margin-top: 8px;
+    }
+    
+    .product-category {
+        font-size: 10px;
+        padding: 3px 10px;
+        margin-bottom: 8px;
+    }
+}
+
+/* للشاشات الصغيرة جداً (هواتف صغيرة) */
+@media (max-width: 480px) {
+    .products-grid.cols-2,
+    .products-grid.cols-3,
+    .products-grid.cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid {
+        gap: 10px;
+    }
+    
+    /* تقليل الارتفاع أكثر */
+    .product-image {
+        height: 140px;
+    }
+    
+    .product-info {
+        padding: 10px;
+    }
+    
+    .product-name {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+    
+    .product-price {
+        font-size: 1rem;
+        margin-top: 6px;
+    }
+    
+    .product-category {
+        font-size: 9px;
+        padding: 2px 8px;
+        margin-bottom: 6px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1941,7 +2081,6 @@ html {
                 <h2>منتجاتنا</h2>
                 <p>أحدث الأجهزة والمعدات السنية بأفضل الأسعار</p>
             </div>
-
 <div class="filters-wrapper">
     <div class="filters-toggle" id="filtersToggle">
         <span><i class="fas fa-sliders-h"></i> الفلاتر والبحث</span>
@@ -2265,6 +2404,24 @@ html {
 
 <script src="products.js"></script>
 <script>
+
+
+// دالة لترتيب المصفوفة بشكل عشوائي
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// إنشاء نسخة عشوائية من المنتجات
+let shuffledProducts = shuffleArray([...products]);
+
+// دالة للحصول على المنتجات بشكل عشوائي
+function getRandomProducts() {
+    return shuffleArray([...products]);
+}
 
     // ========== Cart State ==========
     let cartDelivery = {
@@ -2847,53 +3004,67 @@ ${cartItemsList}
         return names[cat] || cat;
     }
 
-    function renderProducts(productsToShow) {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
-        
-        grid.innerHTML = productsToShow.map(product => `
-            <div class="product-card" data-id="${product.id}">
-                <div class="product-image">
-                    <img src="${product.images[0]}" alt="${product.name}">
-                </div>
-                <div class="product-info">
-                    <span class="product-category">${getCategoryName(product.category)}</span>
-                    <h3 class="product-name">${product.name}</h3>
-                    <div class="product-price">${product.price}</div>
-                </div>
+function renderProducts(productsToShow) {
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
+    
+    // الحفاظ على فئة الأعمدة الحالية
+    const currentColsClass = Array.from(grid.classList).find(cls => cls.startsWith('cols-'));
+    
+    grid.innerHTML = productsToShow.map(product => `
+        <div class="product-card" data-id="${product.id}">
+            <div class="product-image">
+                <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
             </div>
-        `).join('');
-        
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const id = parseInt(card.dataset.id);
-                navigateToProduct(id);
-            });
+            <div class="product-info">
+                <span class="product-category">${getCategoryName(product.category)}</span>
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-price">${product.price}</div>
+            </div>
+        </div>
+    `).join('');
+    
+    // إعادة تطبيق فئة الأعمدة
+    if (currentColsClass) {
+        grid.classList.add(currentColsClass);
+    } else {
+        grid.classList.add('cols-3');
+    }
+    
+    // إضافة أحداث النقر على المنتجات
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const id = parseInt(card.dataset.id);
+            navigateToProduct(id);
         });
-    }
+    });
+}
 
-    function applyFilters() {
-        const category = document.getElementById('categoryFilter').value;
-        const min = parseFloat(document.getElementById('minPrice').value) || 0;
-        const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-        
-        let filtered = [...products];
-        if (category !== 'all') {
-            filtered = filtered.filter(p => p.category === category);
-        }
-        filtered = filtered.filter(p => {
-            const priceNum = parseFloat(p.price.replace(/[^0-9.-]/g, ''));
-            return priceNum >= min && priceNum <= max;
-        });
-        renderProducts(filtered);
+function applyFilters() {
+    const category = document.getElementById('categoryFilter').value;
+    const min = parseFloat(document.getElementById('minPrice').value) || 0;
+    const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+    
+    let filtered = [...products]; // استخدم المنتجات الأصلية للفلترة
+    if (category !== 'all') {
+        filtered = filtered.filter(p => p.category === category);
     }
+    filtered = filtered.filter(p => {
+        const priceNum = parseFloat(p.price.replace(/[^0-9.-]/g, ''));
+        return priceNum >= min && priceNum <= max;
+    });
+    
+    // بعد الفلترة، اعرض النتائج بشكل عشوائي أيضاً
+    renderProducts(shuffleArray(filtered));
+}
 
-    function resetFilters() {
-        document.getElementById('categoryFilter').value = 'all';
-        document.getElementById('minPrice').value = '';
-        document.getElementById('maxPrice').value = '';
-        renderProducts(products);
-    }
+function resetFilters() {
+    document.getElementById('categoryFilter').value = 'all';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    // عرض جميع المنتجات بشكل عشوائي
+    renderProducts(getRandomProducts());
+}
 
 // ========== Navigation ==========
 let currentPage = 'home';
@@ -2903,7 +3074,11 @@ function showHomePage() {
     document.getElementById('productPage').classList.add('hidden');
     document.getElementById('aboutPage').classList.add('hidden');
     document.getElementById('contactPage').classList.add('hidden');
-    renderProducts(products);
+    
+    // عرض المنتجات بشكل عشوائي
+    const randomProducts = getRandomProducts();
+    renderProducts(randomProducts);
+    
     window.scrollTo(0, 0);
     window.location.hash = '';
     currentPage = 'home';
@@ -2977,7 +3152,6 @@ function renderProductDetail(product) {
             </div>
             <div class="detail-info">
                 <h1>${product.name}</h1>
-                <div class="detail-model"><i class="fas fa-cube"></i> الموديل: ${product.model}</div>
                 <div class="detail-price">${product.price}</div>
                 <p class="detail-desc">${product.description}</p>
                 <div class="detail-features">
@@ -3177,6 +3351,43 @@ function initEventListeners() {
     const cartFloating = document.getElementById('cartFloating');
     const cartModal = document.getElementById('cartModal');
     const closeCartBtn = document.getElementById('closeCartBtn');
+    const gridButtons = document.querySelectorAll('.grid-btn');
+    const productsGrid = document.getElementById('productsGrid');
+
+    let savedCols = localStorage.getItem('dentavio_grid_cols') || '3';
+applyGridCols(savedCols);
+
+// تحديث الأزرار
+function updateActiveGridBtn(cols) {
+    gridButtons.forEach(btn => {
+        if (btn.dataset.cols === cols) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// تطبيق عدد الأعمدة
+function applyGridCols(cols) {
+    if (productsGrid) {
+        // إزالة جميع الفئات السابقة
+        productsGrid.classList.remove('cols-2', 'cols-3', 'cols-4');
+        // إضافة الفئة الجديدة
+        productsGrid.classList.add(`cols-${cols}`);
+        // حفظ الإعداد
+        localStorage.setItem('dentavio_grid_cols', cols);
+        updateActiveGridBtn(cols);
+    }
+}
+
+// إضافة أحداث للأزرار
+gridButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const cols = btn.dataset.cols;
+        applyGridCols(cols);
+    });
+});
 
     if (cartFloating && cartModal) {
         cartFloating.addEventListener('click', (e) => {
