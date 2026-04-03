@@ -24,7 +24,7 @@ const products = [
     {
         id: 3,
         name: "قاطع كوتا",
-        category: "tools",
+        category: "devices",
         price: "12 $",
         description: "قاطع كوتا عالي الجودة مصمم لقطع مواد الحشو السنية بدقة وسهولة. مصنوع من مواد متينة لضمان الأداء الممتاز وطول العمر.",
         features: ["تصميم مريح لسهولة الاستخدام", "شفرة حادة ودقيقة لقطع فعال", "مصنوع من مواد متينة مقاومة للتآكل", "سهل التعقيم والتنظيف", "مناسب للاستخدام في العيادات والمستشفيات", "ضمان 2 سنة"],
@@ -57,7 +57,7 @@ const products = [
     {
         id: 6,
         name: "جهاز تبيض 8 ليدات",
-        category: "tools",
+        category: "devices",
         price: "35 $",
         description: "جهاز تبيض أسنان محمول مزود بـ 8 ليدات عالية الكفاءة لتسريع عملية التبييض وتحقيق نتائج مذهلة في وقت قصير. يتميز بتصميم مريح وسهل الاستخدام مع ضمان نتائج آمنة وفعالة.",
         features:["8 ليدات عالية الكفاءة لتسريع التبييض", "تصميم مريح وسهل الاستخدام", "نتائج سريعة وفعالة في جلسة واحدة", "آمن على الأسنان واللثة"],
@@ -79,7 +79,7 @@ const products = [
     {
         id: 8,
         name: "جهاز تصليب معدني",
-        category: "tools",
+        category: "devices",
         price: "35 $",
         description: "جهاز تصليب معدني عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
         features: ["تصميم معدني قوي ومتين", "مصنوع من مواد عالية الجودة مقاومة للتآكل", "سهل التركيب والصيانة", "الوان متعددة"],
@@ -394,7 +394,7 @@ const products = [
                         {
         id: 38,
         name: "جهاز روتري سمارت 9انظمة",
-        category: "tools",
+        category: "devices",
         price: "70 $",
         description: "جهاز روتري سمارت (9 انظمة) عالي الجودة , مزود بجميع الملحقات",
         features: ["جميع الملحقات اللازمة للاستخدام", "موديل مميز وعملي"],
@@ -596,7 +596,7 @@ const products = [
                             {
         id: 58,
         name: "محرك إرواء للمعالجات اللبية",
-        category: "tools",
+        category: "devices",
         price: "50 $",
         description: "",
         features: [""],
@@ -714,4 +714,616 @@ const products = [
         images: ["./imgprodects/prodect69.jpeg"]
     },
 
+
+                            {
+        id: 70,
+        name: "أقماع ورقية meta",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect70.jpeg"]
+    },
+
+                                {
+        id: 71,
+        name: "شانات صنية",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect71.jpeg"]
+    },
+
+                                {
+        id: 72,
+        name: "Apex جيل سادس من شركة Hali",
+        category: "devices",
+        price: "145 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect72.jpeg"]
+    },
+
+                                {
+        id: 73,
+        name: "البيوسيراميك ال one _fil",
+        category: "",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect73.jpeg"]
+    },
+
+                                {
+        id: 74,
+        name: "اللوبس الرأسي مع بطارية اضافية تكبير 3.5×",
+        category: "",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect74.jpeg"]
+    },
+
+                                {
+        id: 75,
+        name: "روتري Cicada pura",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect75.jpeg"]
+    },
+
+                                {
+        id: 76,
+        name: "كمبوزيت الGC",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect76.jpeg"]
+    },
+
+                                {
+        id: 77,
+        name: "قبضة كفترون",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect77.jpeg"]
+    },
+
+                                {
+        id: 78,
+        name: " كاميرا Hyper light   وسينسور eighteeth",
+        category: "devices",
+        price: "$",
+        description: "كاميرا Hyper light   وسينسور eighteeth عالي الجودة مصمم للاستخدام في العيادات السنية. مع كفالة كاملة لمدة 6 اشهر",
+        features: [""],
+        images: ["./imgprodects/prodect78.jpeg", "./imgprodects/prodect79.jpeg", "./imgprodects/prodect80.jpeg"]
+    },
+
+                                {
+        id: 81,
+        name: "كفوف لون زهر",
+        category: "materials",
+        price: "5 $",
+        description: "متوفر مقاس s .m , كفوف لون زهر . توفر حماية فعالة ضد الجسيمات المحمولة جواً والملوثات، مع تصميم مريح يضمن راحة المستخدم طوال فترة الاستخدام",
+        features: [""],
+        images: ["./imgprodects/prodect81.jpeg"]
+    },
+
+                                {
+        id: 82,
+        name: "كمامات لون زهر",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect82.jpeg"]
+    },
+
+                                {
+        id: 83,
+        name: "قبضة توربين ضوئية جودة عالية مع قلب احتياطي",
+        category: "devices",
+        price: "35 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect83.jpeg"]
+    },
+
+                                {
+        id: 84,
+        name: "أجهزة أشعة من شركة وييد بيكر",
+        category: "devices",
+        price: "1650 $",
+        description: "أجهزة أشعة من شركة وييد بيكر كاميرا AiRi_x أحدث إصدار  كفالة لمدة عام كامل + سينسور مقاس 1.5 كفالة لمدة عامين 2",
+        features: [""],
+        images: ["./imgprodects/prodect84.jpeg","./imgprodects/prodect85.jpeg","./imgprodects/prodect86.jpeg"]
+    },
+
+                                {
+        id: 87,
+        name: "سينسور مقاس 1 + كاميرا من شركة سنتيم",
+        category: "devices",
+        price: "1225 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect87.jpeg","./imgprodects/prodect88.jpeg","./imgprodects/prodect89.jpeg"]
+    },
+
+
+                                {
+        id: 90,
+        name: "خيوط إدرينالين",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect90.jpeg"]
+    },
+
+                                {
+        id: 91,
+        name: "حامل حاجز مطاطي بلاستيك",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect91.jpeg"]
+    },
+
+                                {
+        id: 92,
+        name: "نظارات حماية",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect92.jpeg"]
+    },
+
+                                {
+        id: 93,
+        name: "شاشة +كميرا فموية",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect93.jpeg"]
+    },
+
+                                {
+        id: 94,
+        name: "جهاز تصليب بلاستيك",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect94.jpeg"]
+    },
+
+                                    {
+        id: 95,
+        name: "مساند للحشوات",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect95.jpeg"]
+    },
+
+                                {
+        id: 96,
+        name: "مرايا أسنان طرفين فرونتل",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect96.jpeg"]
+    },
+
+                                {
+        id: 97,
+        name: "رؤوس كفترون وييد بيكر",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect97.jpeg"]
+    },
+
+                                {
+        id: 98,
+        name: "ورق عض",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect98.jpeg"]
+    },
+
+                                {
+        id: 99,
+        name: "فواتح فم",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect99.jpeg"]
+    },
+
+                                {
+        id: 100,
+        name: "اللوبس جهاز عدسات مكبرة",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect100.jpeg"]
+    },
+
+                                {
+        id: 101,
+        name: "بوكس أدوات لطلاب طب الأسنان لتنظيم الادوات",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect101.jpeg","./imgprodects/prodect102.jpeg"]
+    },
+
+                                {
+        id: 103,
+        name: "جهاز تسخين الكمبوزيت وسوائل الارواء",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect103.jpeg"]
+    },
+
+                                {
+        id: 104,
+        name: "كيت الدكتور طلال نحلاوي لازالة الادوات المكسورة بالأقنية اللبية",
+        category: "tools",
+        price: "100 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect104.jpeg"]
+    },
+
+                                {
+        id: 105,
+        name: "روتاري ماركة dte وييد بيكر",
+        category: "devices",
+        price: "350 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect105.jpeg"]
+    },
+
+                                {
+        id: 106,
+        name: "Apex جيل عاشر وييد بيكر ماركة dte",
+        category: "devices",
+        price: "190 $",
+        description: " Apex جيل عاشر وييد بيكر ماركة dte عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
+        features: [""],
+        images: ["./imgprodects/prodect106.jpeg"]
+    },
+
+                                {
+        id: 107,
+        name: "بيوسيراميك angelus البرازيلي",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect107.jpeg"]
+    },
+
+                                {
+        id: 108,
+        name: "Apex من شركة الايتيث",
+        category: "devices",
+        price: "155 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect108.jpeg"]
+    },
+
+                                {
+        id: 109,
+        name: "مفتاح كفترون",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect109.jpeg"]
+    },
+
+                                {
+        id: 110,
+        name:" جهاز مزيل غباش لمرايا التصوير",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect110.jpeg"]
+    },
+
+                                {
+        id: 111,
+        name: "Edta سائل",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect111.jpeg"]
+    },
+
+                                {
+        id: 112,
+        name: "تويين فلاش",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect112.jpeg"]
+    },
+
+                                {
+        id: 113,
+        name: "مجموعة كمبوزيت كاريزما",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect113.jpeg"]
+    },
+
+                                {
+        id: 114,
+        name: "ماصات لعاب",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect114.jpeg"]
+    },
+
+                                {
+        id: 115,
+        name: "غلاس الصاق صيني",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect115.jpeg"]
+    },
+
+                                {
+        id: 116,
+        name: "امبولات تخدير هندي الليدوكائين مع ادرينالين",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect116.jpeg"]
+    },
+
+                        {
+        id: 117,
+        name: "كمبوزيت سيال كوري",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect117.jpeg"]
+    },
+
+                            {
+        id: 118,
+        name: "مساند أمامية",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect118.jpeg","./imgprodects/prodect119.jpeg"]
+    },
+
+
+                            {
+        id: 120,
+        name: "شانات صينية",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect120.jpeg"]
+    },
+
+                            {
+        id: 121,
+        name: "شرطان مسندة",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect121.jpeg"]
+    },
+
+                            {
+        id: 122,
+        name: "حاجز مطاطي",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect122.jpeg"]
+    },
+
+                            {
+        id: 123,
+        name: "املغميتر",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect123.jpeg"]
+    },
+
+                            {
+        id: 124,
+        name: "باينات قلع",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect124.jpeg"]
+    },
+
+                            {
+        id: 125,
+        name: "آدسيل",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect125.jpeg"]
+    },
+
+                            {
+        id: 126,
+        name: "غطاء محقنة التخدير",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect126.jpeg"]
+    },
+
+                            {
+        id: 127,
+        name: "امبولات كمبوزيت everx",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect127.jpeg"]
+    },
+
+                            {
+        id: 128,
+        name: "رؤوس بلاستيك لسبريه الهواء",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect128.jpeg"]
+    },
+
+                            {
+        id: 129,
+        name: "كمبوزيت تترك",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect129.jpeg"]
+    },
+
+                            {
+        id: 130,
+        name: "كمبوزيت سيال روبي",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect130.jpeg"]
+    },
+
+                            {
+        id: 131,
+        name: "كمبوزيت سيال روبي",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect131.jpeg"]
+    },
+
+                            {
+        id: 132,
+        name: "بوند GC من شركة ever x",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect132.jpeg"]
+    },
+
+                            {
+        id: 133,
+        name: "مرايا MEGA",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect133.jpeg"]
+    },
+
+                            {
+        id: 134,
+        name: "بوند روبي",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect134.jpeg"]
+    },
+
+                            {
+        id: 135,
+        name: "روتري 9 أنظمة",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect135.jpeg"]
+    },
+
+                            {
+        id: 136,
+        name: "اسمنت GC",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect136.jpeg"]
+    },
+
+                            {
+        id: 138,
+        name: "كمبوزيت GC",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect138.jpeg"]
+    },
+
+                            {
+        id: 139,
+        name: "مبارد روتري toko",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect139.jpeg"]
+    },
 ];

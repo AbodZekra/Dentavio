@@ -2094,6 +2094,7 @@ html {
                     <select id="categoryFilter" class="custom-select">
                         <option value="all"> جميع المنتجات</option>
                         <option value="chairs"> كراسي أسنان</option>
+                        <option value="devices"> أجهزة سنية</option> 
                         <option value="tools"> أدوات سنية</option>
                         <option value="materials"> مواد سنية</option>
                         <option value="clothing">ألبسة طبية</option>
@@ -2594,7 +2595,7 @@ function updateCartUI() {
             
             <div class="cart-total">
                 <span>الإجمالي:</span>
-                <span>${total.toLocaleString()} SYP</span>
+                <span>${total.toLocaleString()} $</span>
             </div>
             <button class="send-order-btn" id="sendCartOrderBtn">
                 <i class="fab fa-telegram"></i> إرسال طلب الشراء
@@ -2722,7 +2723,7 @@ async function sendCartOrder() {
     
     // إعداد قائمة المنتجات للرسالة
     let cartItemsList = cart.map(item => 
-        `• ${item.name} × ${item.quantity} = ${(item.priceNumber * item.quantity).toLocaleString()} SYP`
+        `• ${item.name} × ${item.quantity} = ${(item.priceNumber * item.quantity).toLocaleString()} $`
     ).join('\n');
     
     const total = cart.reduce((sum, item) => sum + (item.priceNumber * item.quantity), 0);
@@ -2730,9 +2731,9 @@ async function sendCartOrder() {
     // إعداد رسالة الواتساب (للعميل)
     let whatsappMessageText = `اهلا وسهلا د.${clientName}\n\nلقد قمت بحجز شراء للمنتجات التالية:\n\n`;
     cart.forEach(item => {
-        whatsappMessageText += `• ${item.name} × ${item.quantity} = ${(item.priceNumber * item.quantity).toLocaleString()} SYP\n`;
+        whatsappMessageText += `• ${item.name} × ${item.quantity} = ${(item.priceNumber * item.quantity).toLocaleString()} $\n`;
     });
-    whatsappMessageText += `\n💰 الإجمالي: ${total.toLocaleString()} SYP\n`;
+    whatsappMessageText += `\n💰 الإجمالي: ${total.toLocaleString()} $\n`;
     
     whatsappMessageText += `\nان كنت ترغب بمتابعة عملية الشراء يمكنك مراسلتنا هنا`;
     
@@ -2749,7 +2750,7 @@ async function sendCartOrder() {
 📦 *المنتجات المطلوبة:*
 ${cartItemsList}
 
-💰 *الإجمالي:* ${total.toLocaleString()} SYP
+💰 *الإجمالي:* ${total.toLocaleString()} $
     `;
     
     // إضافة معلومات التوصيل
@@ -2996,6 +2997,7 @@ ${cartItemsList}
     function getCategoryName(cat) {
         const names = {
             chairs: 'كراسي أسنان',
+            devices: 'أجهزة سنية',  // أضف هذا السطر
             tools: 'أدوات سنية',
             materials: 'مواد سنية',
             clothing: 'ألبسة طبية',
