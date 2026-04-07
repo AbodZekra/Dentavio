@@ -2002,6 +2002,73 @@ html {
         margin-bottom: 6px;
     }
 }
+
+/* Badge للسعر عند الطلب */
+.price-on-request-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-image {
+    position: relative;
+}
+
+.product-price-on-request {
+    color: #f59e0b;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.detail-price-on-request {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f59e0b;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-for-price-btn {
+    background: #25D366 !important;
+}
+
+.contact-for-price-btn:hover {
+    background: #128C7E !important;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .price-on-request-badge {
+        font-size: 10px;
+        padding: 4px 10px;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .product-price-on-request {
+        font-size: 0.8rem;
+    }
+    
+    .detail-price-on-request {
+        font-size: 1.2rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -2466,9 +2533,13 @@ function saveCart() {
     updateCartUI();
 }
 
-// إضافة منتج للسلة
+// ========== تعديل دالة إضافة للسلة (لمنع إضافة المنتجات غير القابلة للطلب) ==========
 function addToCart(product) {
-    // التحقق إذا كان المنتج موجود بالفعل
+    if (!isProductOrderable(product)) {
+        showToast('هذا المنتج غير متاح للشراء المباشر، يرجى التواصل معنا لمعرفة السعر', 'warning');
+        return;
+    }
+    
     const existingItem = cart.find(item => item.id === product.id);
     
     if (existingItem) {
@@ -3006,34 +3077,41 @@ ${cartItemsList}
         return names[cat] || cat;
     }
 
+    // ========== دالة مساعدة للتحقق إذا كان المنتج قابل للطلب ==========
+function isProductOrderable(product) {
+    return !product.priceOnRequest; // إذا كان true يعني غير قابل للطلب المباشر
+}
+
+// ========== تعديل دالة عرض المنتجات ==========
 function renderProducts(productsToShow) {
     const grid = document.getElementById('productsGrid');
     if (!grid) return;
     
-    // الحفاظ على فئة الأعمدة الحالية
     const currentColsClass = Array.from(grid.classList).find(cls => cls.startsWith('cols-'));
     
     grid.innerHTML = productsToShow.map(product => `
         <div class="product-card" data-id="${product.id}">
             <div class="product-image">
                 <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
+                ${product.priceOnRequest ? '<div class="price-on-request-badge"><i class="fas fa-phone-alt"></i> تواصل لمعرفة السعر</div>' : ''}
             </div>
             <div class="product-info">
                 <span class="product-category">${getCategoryName(product.category)}</span>
                 <h3 class="product-name">${product.name}</h3>
-                <div class="product-price">${product.price}</div>
+                ${product.priceOnRequest ? 
+                    '<div class="product-price-on-request"></div>' : 
+                    `<div class="product-price">${product.price}</div>`
+                }
             </div>
         </div>
     `).join('');
     
-    // إعادة تطبيق فئة الأعمدة
     if (currentColsClass) {
         grid.classList.add(currentColsClass);
     } else {
         grid.classList.add('cols-3');
     }
     
-    // إضافة أحداث النقر على المنتجات
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
             const id = parseInt(card.dataset.id);
@@ -3047,16 +3125,38 @@ function applyFilters() {
     const min = parseFloat(document.getElementById('minPrice').value) || 0;
     const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
     
-    let filtered = [...products]; // استخدم المنتجات الأصلية للفلترة
+    let filtered = [...products];
+    
+    // فلترة حسب التصنيف
     if (category !== 'all') {
         filtered = filtered.filter(p => p.category === category);
     }
+    
+    // فلترة حسب السعر (فقط للمنتجات التي لها سعر رقمي)
     filtered = filtered.filter(p => {
-        const priceNum = parseFloat(p.price.replace(/[^0-9.-]/g, ''));
+        // تجاهل المنتجات التي ليس لها سعر رقمي (priceOnRequest = true)
+        if (p.priceOnRequest === true) {
+            // إذا كان المستخدم يبحث بفلتر سعر، لا نستبعدها بل نعتبرها ضمن النطاق
+            // أو نستبعدها حسب ما تريد
+            return true; // نعرضها دائماً في الفلترة
+        }
+        
+        // استخراج الرقم من السعر
+        let priceNum = parseFloat(p.price.replace(/[^0-9.-]/g, ''));
+        
+        // إذا فشل التحويل، نعتبرها ضمن النطاق
+        if (isNaN(priceNum)) {
+            return true;
+        }
+        
         return priceNum >= min && priceNum <= max;
     });
     
-    // بعد الفلترة، اعرض النتائج بشكل عشوائي أيضاً
+    // عرض النتائج
+    if (filtered.length === 0 && category !== 'all') {
+        showToast(`لا توجد منتجات في تصنيف ${getCategoryName(category)}`, 'warning');
+    }
+    
     renderProducts(shuffleArray(filtered));
 }
 
@@ -3064,8 +3164,9 @@ function resetFilters() {
     document.getElementById('categoryFilter').value = 'all';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
-    // عرض جميع المنتجات بشكل عشوائي
+    // عرض جميع المنتجات بشكل عشوائي (بما فيها wooden)
     renderProducts(getRandomProducts());
+    showToast('تم إعادة تعيين جميع الفلاتر', 'info');
 }
 
 // ========== Navigation ==========
@@ -3136,8 +3237,14 @@ function showContactPage() {
         renderProductDetail(product);
     }
 
+// ========== تعديل دالة عرض تفاصيل المنتج ==========
 function renderProductDetail(product) {
     const container = document.getElementById('productDetailContainer');
+    const isOrderable = isProductOrderable(product);
+        // قم بإنشاء رابط المنتج الكامل
+    const productUrl = `${window.location.origin}${window.location.pathname}#product/${product.id}`;
+    // قم بترميز الرابط ليكون صالحاً للاستخدام في رابط واتساب
+    const encodedProductUrl = encodeURIComponent(productUrl);
     container.innerHTML = `
         <div class="detail-container">
             <div class="product-gallery">
@@ -3154,25 +3261,46 @@ function renderProductDetail(product) {
             </div>
             <div class="detail-info">
                 <h1>${product.name}</h1>
-                <div class="detail-price">${product.price}</div>
+                ${product.priceOnRequest ? 
+                    `<div class="detail-price-on-request">
+                        <i class="fas fa-phone-alt"></i> 
+                        <span>تواصل معنا لمعرفة السعر و المعلومات التفصيلية</span>
+                    </div>` : 
+                    `<div class="detail-price">${product.price}</div>`
+                }
                 <p class="detail-desc">${product.description}</p>
                 <div class="detail-features">
-                    ${product.features.map(f => `<span class="feature-tag"><i class="fas fa-check"></i> ${f}</span>`).join('')}
+                    ${product.features.map(f => `<span class="feature-tag"> ${f}</span>`).join('')}
                 </div>
-                    <div class="detail-actions">
+                <div class="detail-actions">
+                    ${isOrderable ? `
                         <button class="btn btn-primary" id="addToCartDetailBtn">
                             <i class="fas fa-cart-plus"></i> <span>إضافة للسلة</span>
                         </button>
                         <button class="btn btn-primary" id="bookNowDetailBtn">
                             <i class="fas fa-shopping-cart"></i> <span>طلب المنتج</span>
                         </button>
-                        <button class="btn btn-outline" id="shareProductDetailBtn">
-                            <i class="fas fa-share-alt"></i> <span>مشاركة</span>
-                        </button>
-                        <button class="btn btn-outline" id="backToHomeDetailBtn">
-                            <i class="fas fa-arrow-right"></i> <span>العودة</span>
-                        </button>
+                    ` : `
+                        <div></div>
+                    `}
+                    <button class="btn btn-outline" id="shareProductDetailBtn">
+                        <i class="fas fa-share-alt"></i> <span>مشاركة</span>
+                    </button>
+                    <button class="btn btn-outline" id="backToHomeDetailBtn">
+                        <i class="fas fa-arrow-right"></i> <span>العودة</span>
+                    </button>
+                </div>
+                ${!isOrderable ? `
+                    <div class="contact-methods" style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.1); border-radius: 12px;">
+                        <p style="margin-bottom: 10px;"><i class="fas fa-info-circle"></i> للحصول على سعر هذا المنتج، يرجى التواصل معنا عبر:</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://wa.me/963934766960?text=مرحباً، أرغب في الاستفسار عن سعر هذا المنتج: \n ${encodedProductUrl}" 
+                            target="_blank" class="btn btn-primary" style="background: #25D366;">
+                                <i class="fab fa-whatsapp"></i> واتساب
+                            </a>
+                        </div>
                     </div>
+                ` : ''}
             </div>
         </div>
     `;
@@ -3278,11 +3406,36 @@ function renderProductDetail(product) {
         }
     }
     
-    // ربط الأحداث
-    document.getElementById('addToCartDetailBtn').addEventListener('click', () => {addToCart(product);});
-    document.getElementById('bookNowDetailBtn').addEventListener('click', () => openBookingModal(product));
-    document.getElementById('shareProductDetailBtn').addEventListener('click', () => shareProduct(product));
-    document.getElementById('backToHomeDetailBtn').addEventListener('click', showHomePage);
+    // إضافة أحداث إضافية للمنتجات غير القابلة للطلب
+    if (!isOrderable) {
+        const contactViaFormBtn = document.getElementById('contactViaFormBtn');
+        if (contactViaFormBtn) {
+            contactViaFormBtn.addEventListener('click', () => {
+                showContactPage();
+                // ملء نموذج التواصل باسم المنتج
+                const messageField = document.getElementById('contactMessage');
+                if (messageField) {
+                    messageField.value = `الاستفسار عن سعر منتج: ${product.name}`;
+                }
+                window.scrollTo(0, 0);
+            });
+        }
+    }
+    
+    // ربط الأحداث للمنتجات القابلة للطلب فقط
+    if (isOrderable) {
+        const addToCartBtn = document.getElementById('addToCartDetailBtn');
+        if (addToCartBtn) addToCartBtn.addEventListener('click', () => addToCart(product));
+        
+        const bookNowBtn = document.getElementById('bookNowDetailBtn');
+        if (bookNowBtn) bookNowBtn.addEventListener('click', () => openBookingModal(product));
+    }
+    
+    const shareBtn = document.getElementById('shareProductDetailBtn');
+    if (shareBtn) shareBtn.addEventListener('click', () => shareProduct(product));
+    
+    const backBtn = document.getElementById('backToHomeDetailBtn');
+    if (backBtn) backBtn.addEventListener('click', showHomePage);
 }
 
     function shareProduct(product) {
@@ -3299,14 +3452,18 @@ function renderProductDetail(product) {
         }
     }
 
-    // ========== Booking Modal ==========
-    function openBookingModal(product) {
-        currentBookingProduct = product;
-        document.getElementById('modalProductName').innerHTML = `<i class="fas fa-tooth"></i> حجز: ${product.name}`;
-        fillBookingForm();
-        document.getElementById('bookingModal').classList.add('open');
-        document.body.style.overflow = 'hidden';
+// ========== تعديل دالة فتح مودال الحجز ==========
+function openBookingModal(product) {
+    if (!isProductOrderable(product)) {
+        showToast('هذا المنتج غير متاح للحجز المباشر، يرجى التواصل معنا لمعرفة السعر', 'warning');
+        return;
     }
+    currentBookingProduct = product;
+    document.getElementById('modalProductName').innerHTML = `<i class="fas fa-tooth"></i> حجز: ${product.name}`;
+    fillBookingForm();
+    document.getElementById('bookingModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
 
     function closeBookingModal() {
         document.getElementById('bookingModal').classList.remove('open');

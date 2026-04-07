@@ -1326,4 +1326,215 @@ const products = [
         features: [""],
         images: ["./imgprodects/prodect139.jpeg"]
     },
+
+                                {
+        id:140 ,
+        name: "Apex من شركة وييد بيكر",
+        category: "devices",
+        price: "$",
+        description: "Apex من شركة وييد بيكر عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
+        features: [""],
+        images: ["./imgprodects/prodect140.jpeg"]
+    },
+
+                                    {
+        id:141 ,
+        name: "قبضلت توربين being",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect141.jpeg"]
+    },
+
+                                    {
+        id:142 ,
+        name: "كفوف one plus",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect142.jpeg"]
+    },
+
+                                    {
+        id:143 ,
+        name: "محاقن تخدير الكترونية",
+        category: "devices",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect143.jpeg"]
+    },
+
+                                    {
+        id:144 ,
+        name: "حمض الفوسفور",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect144.jpeg"]
+    },
+
+                                    {
+        id:145 ,
+        name: "تبيض أسنان أمريكي",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect145.jpeg"]
+    },
+
+                                    {
+        id:146 ,
+        name: "قبضة مكرتور",
+        category: "tools",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect146.jpeg"]
+    },
+
+                                    {
+        id:147 ,
+        name: "بوليش أسنان",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect147.jpeg"]
+    },
+
+                                    {
+        id:148 ,
+        name: "شمع حواف",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect148.jpeg"]
+    },
+
+                                    {
+        id:149 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect149.jpeg"]
+    },
+
+                                    {
+        id:150 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect150.jpeg"]
+    },
+
+                                    {
+        id:151 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect151.jpeg"]
+    },
+
+                                    {
+        id:152 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect152.jpeg"]
+    },
+
+                                    {
+        id:153 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect153.jpeg"]
+    },
+
+                                    {
+        id:154 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect154.jpeg"]
+    },
+
+                                    {
+        id:155 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect155.jpeg"]
+    },
+
+                                    {
+        id:156 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect156.jpeg"]
+    },
+
+                                    {
+        id:157 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect157.jpeg"]
+    },
+
+                                        {
+        id:158 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect158.jpeg"]
+    },
+
+                                        {
+        id:159 ,
+        name: "خشبيات عيادة مماثلة للصورة ",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect159.jpeg"]
+    },
 ];
