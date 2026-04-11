@@ -719,7 +719,7 @@ const products = [
         id: 70,
         name: "أقماع ورقية meta",
         category: "materials",
-        price: "$",
+        price: "1.75 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect70.jpeg"]
@@ -729,7 +729,7 @@ const products = [
         id: 71,
         name: "شانات صنية",
         category: "materials",
-        price: "$",
+        price: "3.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect71.jpeg"]
@@ -749,7 +749,7 @@ const products = [
         id: 73,
         name: "البيوسيراميك ال one _fil",
         category: "",
-        price: "$",
+        price: "45 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect73.jpeg"]
@@ -769,7 +769,7 @@ const products = [
         id: 75,
         name: "روتري Cicada pura",
         category: "devices",
-        price: "$",
+        price: "110 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect75.jpeg"]
@@ -779,7 +779,17 @@ const products = [
         id: 76,
         name: "كمبوزيت الGC",
         category: "materials",
-        price: "$",
+        price: "28 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect76.jpeg"]
+    },
+
+                                    {
+        id: 215,
+        name: "كمبوزيت الGC",
+        category: "materials",
+        price: "38 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect76.jpeg"]
@@ -819,7 +829,7 @@ const products = [
         id: 82,
         name: "كمامات لون زهر",
         category: "materials",
-        price: "$",
+        price: "1.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect82.jpeg"]
@@ -860,7 +870,7 @@ const products = [
         id: 90,
         name: "خيوط إدرينالين",
         category: "materials",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect90.jpeg"]
@@ -870,7 +880,7 @@ const products = [
         id: 91,
         name: "حامل حاجز مطاطي بلاستيك",
         category: "materials",
-        price: "$",
+        price: "3.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect91.jpeg"]
@@ -880,7 +890,7 @@ const products = [
         id: 92,
         name: "نظارات حماية",
         category: "materials",
-        price: "$",
+        price: "1.25 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect92.jpeg"]
@@ -890,7 +900,7 @@ const products = [
         id: 93,
         name: "شاشة +كميرا فموية",
         category: "devices",
-        price: "$",
+        price: "190 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect93.jpeg"]
@@ -900,7 +910,7 @@ const products = [
         id: 94,
         name: "جهاز تصليب بلاستيك",
         category: "devices",
-        price: "$",
+        price: "15 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect94.jpeg"]
@@ -910,7 +920,7 @@ const products = [
         id: 95,
         name: "مساند للحشوات",
         category: "tools",
-        price: "$",
+        price: "5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect95.jpeg"]
@@ -920,7 +930,7 @@ const products = [
         id: 96,
         name: "مرايا أسنان طرفين فرونتل",
         category: "tools",
-        price: "$",
+        price: "9 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect96.jpeg"]
@@ -930,7 +940,7 @@ const products = [
         id: 97,
         name: "رؤوس كفترون وييد بيكر",
         category: "tools",
-        price: "$",
+        price: "7 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect97.jpeg"]
@@ -940,8 +950,8 @@ const products = [
         id: 98,
         name: "ورق عض",
         category: "materials",
-        price: "$",
-        description: "",
+        price: "4.5 $",
+        description: "العلبة تحوي 12 دفتر",
         features: [""],
         images: ["./imgprodects/prodect98.jpeg"]
     },
@@ -960,7 +970,7 @@ const products = [
         id: 100,
         name: "اللوبس جهاز عدسات مكبرة",
         category: "devices",
-        price: "$",
+        price: "45 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect100.jpeg"]
@@ -970,7 +980,7 @@ const products = [
         id: 101,
         name: "بوكس أدوات لطلاب طب الأسنان لتنظيم الادوات",
         category: "tools",
-        price: "$",
+        price: "20 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect101.jpeg","./imgprodects/prodect102.jpeg"]
@@ -1040,7 +1050,7 @@ const products = [
         id: 109,
         name: "مفتاح كفترون",
         category: "tools",
-        price: "$",
+        price: "7 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect109.jpeg"]
@@ -1060,7 +1070,7 @@ const products = [
         id: 111,
         name: "Edta سائل",
         category: "materials",
-        price: "$",
+        price: "1.75 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect111.jpeg"]
@@ -1070,7 +1080,7 @@ const products = [
         id: 112,
         name: "تويين فلاش",
         category: "devices",
-        price: "$",
+        price: "48 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect112.jpeg"]
@@ -1080,7 +1090,7 @@ const products = [
         id: 113,
         name: "مجموعة كمبوزيت كاريزما",
         category: "materials",
-        price: "$",
+        price: "50 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect113.jpeg"]
@@ -1090,7 +1100,7 @@ const products = [
         id: 114,
         name: "ماصات لعاب",
         category: "tools",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect114.jpeg"]
@@ -1100,7 +1110,7 @@ const products = [
         id: 115,
         name: "غلاس الصاق صيني",
         category: "materials",
-        price: "$",
+        price: "5.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect115.jpeg"]
@@ -1110,7 +1120,7 @@ const products = [
         id: 116,
         name: "امبولات تخدير هندي الليدوكائين مع ادرينالين",
         category: "materials",
-        price: "$",
+        price: "13.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect116.jpeg"]
@@ -1120,7 +1130,7 @@ const products = [
         id: 117,
         name: "كمبوزيت سيال كوري",
         category: "materials",
-        price: "$",
+        price: "15 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect117.jpeg"]
@@ -1130,7 +1140,7 @@ const products = [
         id: 118,
         name: "مساند أمامية",
         category: "materials",
-        price: "$",
+        price: "7 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect118.jpeg","./imgprodects/prodect119.jpeg"]
@@ -1141,7 +1151,7 @@ const products = [
         id: 120,
         name: "شانات صينية",
         category: "materials",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect120.jpeg"]
@@ -1151,7 +1161,7 @@ const products = [
         id: 121,
         name: "شرطان مسندة",
         category: "materials",
-        price: "$",
+        price: "2.75 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect121.jpeg"]
@@ -1161,7 +1171,7 @@ const products = [
         id: 122,
         name: "حاجز مطاطي",
         category: "tools",
-        price: "$",
+        price: "20 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect122.jpeg"]
@@ -1171,7 +1181,7 @@ const products = [
         id: 123,
         name: "املغميتر",
         category: "devices",
-        price: "$",
+        price: "75 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect123.jpeg"]
@@ -1181,7 +1191,7 @@ const products = [
         id: 124,
         name: "باينات قلع",
         category: "tools",
-        price: "$",
+        price: "22 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect124.jpeg"]
@@ -1191,7 +1201,7 @@ const products = [
         id: 125,
         name: "آدسيل",
         category: "materials",
-        price: "$",
+        price: "13.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect125.jpeg"]
@@ -1221,7 +1231,7 @@ const products = [
         id: 128,
         name: "رؤوس بلاستيك لسبريه الهواء",
         category: "tools",
-        price: "$",
+        price: "7 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect128.jpeg"]
@@ -1231,7 +1241,7 @@ const products = [
         id: 129,
         name: "كمبوزيت تترك",
         category: "materials",
-        price: "$",
+        price: "24 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect129.jpeg"]
@@ -1239,7 +1249,7 @@ const products = [
 
                             {
         id: 130,
-        name: "كمبوزيت سيال روبي",
+        name: "غلاس ضوئي",
         category: "materials",
         price: "$",
         description: "",
@@ -1251,7 +1261,7 @@ const products = [
         id: 131,
         name: "كمبوزيت سيال روبي",
         category: "materials",
-        price: "$",
+        price: "6 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect131.jpeg"]
@@ -1281,7 +1291,7 @@ const products = [
         id: 134,
         name: "بوند روبي",
         category: "materials",
-        price: "$",
+        price: "8 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect134.jpeg"]
@@ -1291,7 +1301,7 @@ const products = [
         id: 135,
         name: "روتري 9 أنظمة",
         category: "devices",
-        price: "$",
+        price: "78 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect135.jpeg"]
@@ -1301,7 +1311,7 @@ const products = [
         id: 136,
         name: "اسمنت GC",
         category: "materials",
-        price: "$",
+        price: "30 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect136.jpeg"]
@@ -1311,7 +1321,7 @@ const products = [
         id: 138,
         name: "كمبوزيت GC",
         category: "materials",
-        price: "$",
+        price: "28 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect138.jpeg"]
@@ -1321,7 +1331,7 @@ const products = [
         id: 139,
         name: "مبارد روتري toko",
         category: "tools",
-        price: "$",
+        price: "5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect139.jpeg"]
@@ -1351,7 +1361,7 @@ const products = [
         id:142 ,
         name: "كفوف one plus",
         category: "materials",
-        price: "$",
+        price: "3.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect142.jpeg"]
@@ -1371,7 +1381,7 @@ const products = [
         id:144 ,
         name: "حمض الفوسفور",
         category: "materials",
-        price: "$",
+        price: "4.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect144.jpeg"]
@@ -1381,7 +1391,7 @@ const products = [
         id:145 ,
         name: "تبيض أسنان أمريكي",
         category: "materials",
-        price: "$",
+        price: "25 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect145.jpeg"]
@@ -1416,125 +1426,42 @@ const products = [
         features: [""],
         images: ["./imgprodects/prodect148.jpeg"]
     },
-
-                                    {
-        id:149 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
+/////////////////خشبيات من 149 ل 214 بآخر الكود
+                                        {
+        id:215 ,
+        name: "جلفوم",
+        category: "materials",
+        price: "1.75 $",
         description: "",
         features: [""],
-        images: ["./imgprodects/prodect149.jpeg"]
-    },
-
-                                    {
-        id:150 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect150.jpeg"]
-    },
-
-                                    {
-        id:151 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect151.jpeg"]
-    },
-
-                                    {
-        id:152 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect152.jpeg"]
-    },
-
-                                    {
-        id:153 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect153.jpeg"]
-    },
-
-                                    {
-        id:154 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect154.jpeg"]
-    },
-
-                                    {
-        id:155 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect155.jpeg"]
-    },
-
-                                    {
-        id:156 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect156.jpeg"]
-    },
-
-                                    {
-        id:157 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect157.jpeg"]
+        images: ["./imgprodects/prodect215.jpeg"]
     },
 
                                         {
-        id:158 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
+        id:216 ,
+        name: "مساند جزئية",
+        category: "materials",
+        price: "2.5$",
         description: "",
         features: [""],
-        images: ["./imgprodects/prodect158.jpeg"]
+        images: ["./imgprodects/prodect216.jpeg"]
     },
 
-                                        {
-        id:159 ,
-        name: "خشبيات عيادة مماثلة للصورة ",
-        category: "wooden",
-        price: "$",
-        priceOnRequest: true,
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect159.jpeg"]
-    },
 ];
+
+
+
+
+//// خشبيات العيادة الصور من 149 ل 214
+for (let id = 149; id <= 214; id++) {
+    products.push({
+        id: id,
+        name: "خشبيات عيادة مماثلة للصورة",
+        category: "wooden",
+        price: "$",
+        priceOnRequest: true,
+        description: "",
+        features: [""],
+        images: [`./imgprodects/prodect${id}.jpeg`]
+    });
+}
