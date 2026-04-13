@@ -2475,20 +2475,21 @@ html {
 
 
 // دالة لترتيب المصفوفة بشكل عشوائي
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+// function shuffleArray(array) {
+//     for (let i = array.length - 1; i > 0; i--) {
+//         const j = Math.floor(Math.random() * (i + 1));
+//         [array[i], array[j]] = [array[j], array[i]];
+//     }
+//     return array;
+// }
 
 // إنشاء نسخة عشوائية من المنتجات
-let shuffledProducts = shuffleArray([...products]);
+// let shuffledProducts = shuffleArray([...products]);
 
 // دالة للحصول على المنتجات بشكل عشوائي
 function getRandomProducts() {
-    return shuffleArray([...products]);
+    return [...products]; // بدون ترتيب عشوائي
+    // return shuffleArray([...products]); مع ترتيب عشوائي
 }
 
     // ========== Cart State ==========
@@ -2889,7 +2890,7 @@ ${cartItemsList}
     // ========== State ==========
     let currentProduct = null;
     let currentBookingProduct = null;
-    
+    let currentDisplayedProducts = [];
     let userData = {
         name: '',
         phone: '',
@@ -3087,6 +3088,8 @@ function renderProducts(productsToShow) {
     const grid = document.getElementById('productsGrid');
     if (!grid) return;
     
+     // حفظ المنتجات المعروضة حالياً
+    currentDisplayedProducts = [...productsToShow];
     const currentColsClass = Array.from(grid.classList).find(cls => cls.startsWith('cols-'));
     
     grid.innerHTML = productsToShow.map(product => `
@@ -3152,277 +3155,868 @@ function applyFilters() {
         return priceNum >= min && priceNum <= max;
     });
     
+    saveFilterState();
     // عرض النتائج
     if (filtered.length === 0 && category !== 'all') {
         showToast(`لا توجد منتجات في تصنيف ${getCategoryName(category)}`, 'warning');
     }
     
-    renderProducts(shuffleArray(filtered));
+    // renderProducts(shuffleArray(filtered));عشوائي
+
+    renderProducts(filtered);
 }
 
 function resetFilters() {
     document.getElementById('categoryFilter').value = 'all';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
-    // عرض جميع المنتجات بشكل عشوائي (بما فيها wooden)
-    renderProducts(getRandomProducts());
+    localStorage.removeItem(FILTER_STATE_KEY);
+    
+    // عرض جميع المنتجات
+    renderProducts([...products]);
     showToast('تم إعادة تعيين جميع الفلاتر', 'info');
 }
 
+
+// ========== حفظ واسترجاع حالة الفلترة ==========
+const FILTER_STATE_KEY = 'dentavio_filter_state';
+
+// حفظ حالة الفلترة
+function saveFilterState() {
+    const filterState = {
+        category: document.getElementById('categoryFilter')?.value || 'all',
+        minPrice: document.getElementById('minPrice')?.value || '',
+        maxPrice: document.getElementById('maxPrice')?.value || '',
+        timestamp: Date.now()
+    };
+    localStorage.setItem(FILTER_STATE_KEY, JSON.stringify(filterState));
+}
+
+// استرجاع حالة الفلترة
+function loadFilterState() {
+    const saved = localStorage.getItem(FILTER_STATE_KEY);
+    if (saved) {
+        try {
+            const filterState = JSON.parse(saved);
+            
+            // استعادة القيم في الحقول
+            const categoryFilter = document.getElementById('categoryFilter');
+            const minPrice = document.getElementById('minPrice');
+            const maxPrice = document.getElementById('maxPrice');
+            
+            if (categoryFilter) categoryFilter.value = filterState.category || 'all';
+            if (minPrice) minPrice.value = filterState.minPrice || '';
+            if (maxPrice) maxPrice.value = filterState.maxPrice || '';
+            
+            return filterState;
+        } catch (e) {
+            console.error('Error loading filter state:', e);
+        }
+    }
+    return null;
+}
+
+// تطبيق الفلترة المحفوظة عند تحميل الصفحة
+function applySavedFilters() {
+    const filterState = loadFilterState();
+    if (filterState) {
+        // التحقق مما إذا كانت هناك فلترة نشطة (ليست القيم الافتراضية)
+        const hasActiveFilters = filterState.category !== 'all' || 
+                                filterState.minPrice !== '' || 
+                                filterState.maxPrice !== '';
+        
+        if (hasActiveFilters) {
+            applyFilters();
+        }
+    }
+}
+
+// تعديل دالة resetFilters لحذف الحالة المحفوظة
+function resetFilters() {
+    document.getElementById('categoryFilter').value = 'all';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    
+    // حذف حالة الفلترة المحفوظة
+    localStorage.removeItem(FILTER_STATE_KEY);
+    
+    // عرض جميع المنتجات بترتيبها الأصلي
+    renderProducts([...products]);
+    showToast('تم إعادة تعيين جميع الفلاتر', 'info');
+}
+
+
 // ========== Navigation ==========
 let currentPage = 'home';
+let homeScrollPosition = 0;
+let pendingScrollRestore = false;
 
 function showHomePage() {
+    // أولاً: إظهار الصفحة الرئيسية ليكون لها ارتفاع حقيقي
     document.getElementById('homePage').classList.remove('hidden');
     document.getElementById('productPage').classList.add('hidden');
     document.getElementById('aboutPage').classList.add('hidden');
     document.getElementById('contactPage').classList.add('hidden');
     
-    // عرض المنتجات بشكل عشوائي
-    const randomProducts = getRandomProducts();
-    renderProducts(randomProducts);
+    // عرض المنتجات (إذا لم تكن معروضة)
+    if (currentDisplayedProducts.length > 0) {
+        renderProducts(currentDisplayedProducts);
+    } else {
+        renderProducts(products);
+    }
     
-    window.scrollTo(0, 0);
+    // استعادة موقع التمرير بعد أن تصبح الصفحة مرئية ولها ارتفاع
+    const savedPosition = sessionStorage.getItem('dentavio_home_scroll');
+    if (savedPosition) {
+        const scrollY = parseInt(savedPosition, 10);
+        
+        // استخدام requestAnimationFrame لضمان أن DOM قد تم تحديثه
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    top: scrollY,
+                    behavior: 'instant'
+                });
+            });
+        });
+    }
+    
     window.location.hash = '';
     currentPage = 'home';
 }
 
-function showAboutPage() {
-    document.getElementById('homePage').classList.add('hidden');
-    document.getElementById('productPage').classList.add('hidden');
-    document.getElementById('aboutPage').classList.remove('hidden');
-    document.getElementById('contactPage').classList.add('hidden');
-    window.scrollTo(0, 0);
-    window.location.hash = 'about';
-    currentPage = 'about';
-}
-
-function showContactPage() {
-    document.getElementById('homePage').classList.add('hidden');
-    document.getElementById('productPage').classList.add('hidden');
-    document.getElementById('aboutPage').classList.add('hidden');
-    document.getElementById('contactPage').classList.remove('hidden');
-    window.scrollTo(0, 0);
-    window.location.hash = 'contact';
-    currentPage = 'contact';
-}
 
 function showAboutPage() {
-    document.getElementById('homePage').classList.add('hidden');
-    document.getElementById('productPage').classList.add('hidden');
-    document.getElementById('aboutPage').classList.remove('hidden');
-    document.getElementById('contactPage').classList.add('hidden');
-    window.scrollTo(0, 0);
-    window.location.hash = 'about';
-    currentPage = 'about';
-}
-
-function showContactPage() {
-    document.getElementById('homePage').classList.add('hidden');
-    document.getElementById('productPage').classList.add('hidden');
-    document.getElementById('aboutPage').classList.add('hidden');
-    document.getElementById('contactPage').classList.remove('hidden');
-    window.scrollTo(0, 0);
-    window.location.hash = 'contact';
-    currentPage = 'contact';
-}
-    function navigateToProduct(productId) {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-        
-        currentProduct = product;
-        document.getElementById('homePage').classList.add('hidden');
-        document.getElementById('productPage').classList.remove('hidden');
-        window.location.hash = `product/${productId}`;
-        renderProductDetail(product);
+    // حفظ موقع التمرير قبل مغادرة الصفحة الرئيسية
+    if (currentPage === 'home') {
+        const scrollY = window.scrollY;
+        sessionStorage.setItem('dentavio_home_scroll', scrollY);
     }
+    
+    document.getElementById('homePage').classList.add('hidden');
+    document.getElementById('productPage').classList.add('hidden');
+    document.getElementById('aboutPage').classList.remove('hidden');
+    document.getElementById('contactPage').classList.add('hidden');
+    window.scrollTo(0, 0);
+    window.location.hash = 'about';
+    currentPage = 'about';
+}
+
+function showContactPage() {
+    // حفظ موقع التمرير قبل مغادرة الصفحة الرئيسية
+    if (currentPage === 'home') {
+        const scrollY = window.scrollY;
+        sessionStorage.setItem('dentavio_home_scroll', scrollY);
+    }
+    
+    document.getElementById('homePage').classList.add('hidden');
+    document.getElementById('productPage').classList.add('hidden');
+    document.getElementById('aboutPage').classList.add('hidden');
+    document.getElementById('contactPage').classList.remove('hidden');
+    window.scrollTo(0, 0);
+    window.location.hash = 'contact';
+    currentPage = 'contact';
+}
+
+function navigateToProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    // حفظ موقع التمرير قبل الانتقال للمنتج
+    if (currentPage === 'home') {
+        const scrollY = window.scrollY;
+        sessionStorage.setItem('dentavio_home_scroll', scrollY);
+    }
+    
+    currentProduct = product;
+    
+    // إخفاء الصفحة الرئيسية وإظهار صفحة المنتج
+    document.getElementById('homePage').classList.add('hidden');
+    document.getElementById('productPage').classList.remove('hidden');
+    document.getElementById('aboutPage').classList.add('hidden');
+    document.getElementById('contactPage').classList.add('hidden');
+    
+    window.scrollTo(0, 0); // تمرير صفحة المنتج للأعلى
+    window.location.hash = `product/${productId}`;
+    renderProductDetail(product);
+    currentPage = 'product';
+}
 
 // ========== تعديل دالة عرض تفاصيل المنتج ==========
 function renderProductDetail(product) {
     const container = document.getElementById('productDetailContainer');
     const isOrderable = isProductOrderable(product);
-        // قم بإنشاء رابط المنتج الكامل
     const productUrl = `${window.location.origin}${window.location.pathname}#product/${product.id}`;
-    // قم بترميز الرابط ليكون صالحاً للاستخدام في رابط واتساب
     const encodedProductUrl = encodeURIComponent(productUrl);
+    
     container.innerHTML = `
-        <div class="detail-container">
-            <div class="product-gallery">
-                <div class="gallery-main">
-                    <img id="mainImage" src="${product.images[0]}" alt="${product.name}">
+        <!-- زر العودة في الأعلى بشكل منفصل وأنيق -->
+        <div class="mobile-back-header">
+            <button class="back-btn-elegant" id="backToHomeDetailBtn">
+                <i class="fas fa-arrow-right"></i>
+                <span>العودة للمنتجات</span>
+            </button>
+            <button class="share-btn-elegant" id="shareProductDetailBtn">
+                <i class="fas fa-share-alt"></i>
+            </button>
+        </div>
+
+        <div class="detail-container-elegant">
+            <!-- معرض الصور المحسن -->
+            <div class="product-gallery-elegant">
+                <div class="gallery-main-wrapper">
+                    <img id="mainImage" src="${product.images[0]}" alt="${product.name}" class="main-image-elegant">
+                    ${product.images.length > 1 ? `
+                        <button class="gallery-nav prev" id="prevImageBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="gallery-nav next" id="nextImageBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    ` : ''}
+                    <div class="image-counter-elegant" id="imageCounter">
+                        <span>1/${product.images.length}</span>
+                    </div>
                 </div>
-                <div class="gallery-thumbs" id="thumbnails">
-                    ${product.images.map((img, idx) => `
-                        <div class="thumb ${idx === 0 ? 'active' : ''}" data-img="${img}">
-                            <img src="${img}" alt="صورة ${idx + 1}" loading="lazy">
-                        </div>
-                    `).join('')}
-                </div>
+                
+                ${product.images.length > 1 ? `
+                    <div class="gallery-thumbs-elegant" id="thumbnails">
+                        ${product.images.map((img, idx) => `
+                            <div class="thumb-elegant ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+                                <img src="${img}" alt="صورة ${idx + 1}" loading="lazy">
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
             </div>
-            <div class="detail-info">
-                <h1>${product.name}</h1>
-                ${product.priceOnRequest ? 
-                    `<div class="detail-price-on-request">
-                        <i class="fas fa-phone-alt"></i> 
-                        <span>تواصل معنا لمعرفة السعر و المعلومات التفصيلية</span>
-                    </div>` : 
-                    `<div class="detail-price">${product.price}</div>`
-                }
-                <p class="detail-desc">${product.description}</p>
-                <div class="detail-features">
-                    ${product.features.map(f => `<span class="feature-tag"> ${f}</span>`).join('')}
+
+            <!-- معلومات المنتج -->
+            <div class="product-info-elegant">
+                <!-- التصنيف والسعر -->
+                <div class="product-header-elegant">
+                    <span class="category-badge-elegant">
+                        <i class="fas fa-tag"></i>
+                        ${getCategoryName(product.category)}
+                    </span>
+                    ${!product.priceOnRequest ? `
+                        <div class="price-tag-elegant">${product.price}</div>
+                    ` : ''}
                 </div>
-                <div class="detail-actions">
+
+                <!-- اسم المنتج -->
+                <h1 class="product-title-elegant">${product.name}</h1>
+                
+                ${product.priceOnRequest ? `
+                    <div class="price-on-request-elegant">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>السعر عند الطلب - تواصل معنا للمزيد من المعلومات</span>
+                    </div>
+                ` : ''}
+
+                <!-- الوصف -->
+                <div class="description-section">
+                    <h3 class="section-title-elegant">
+                        <i class="fas fa-align-right"></i>
+                        وصف المنتج
+                    </h3>
+                    <p class="product-description-elegant">${product.description}</p>
+                </div>
+
+                <!-- المميزات -->
+                ${product.features && product.features.length > 0 ? `
+                    <div class="features-section">
+                        <h3 class="section-title-elegant">
+                            <i class="fas fa-star"></i>
+                            المميزات
+                        </h3>
+                        <div class="features-grid-elegant">
+                            ${product.features.map(f => `
+                                <div class="feature-item-elegant">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>${f}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- أزرار الإجراءات -->
+                <div class="actions-section">
                     ${isOrderable ? `
-                        <button class="btn btn-primary" id="addToCartDetailBtn">
-                            <i class="fas fa-cart-plus"></i> <span>إضافة للسلة</span>
-                        </button>
-                        <button class="btn btn-primary" id="bookNowDetailBtn">
-                            <i class="fas fa-shopping-cart"></i> <span>طلب المنتج</span>
-                        </button>
-                    ` : `
-                        <div></div>
-                    `}
-                    <button class="btn btn-outline" id="shareProductDetailBtn">
-                        <i class="fas fa-share-alt"></i> <span>مشاركة</span>
-                    </button>
-                    <button class="btn btn-outline" id="backToHomeDetailBtn">
-                        <i class="fas fa-arrow-right"></i> <span>العودة</span>
-                    </button>
+                        <div class="primary-actions">
+                            <button class="btn-primary-elegant" id="addToCartDetailBtn">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>إضافة للسلة</span>
+                            </button>
+                            <button class="btn-secondary-elegant" id="bookNowDetailBtn">
+                                <i class="fas fa-bolt"></i>
+                                <span>طلب المنتج</span>
+                            </button>
+                        </div>
+                    ` : ''}
                 </div>
+
+                <!-- قسم التواصل للمنتجات غير القابلة للطلب -->
                 ${!isOrderable ? `
-                    <div class="contact-methods" style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.1); border-radius: 12px;">
-                        <p style="margin-bottom: 10px;"><i class="fas fa-info-circle"></i> للحصول على سعر هذا المنتج، يرجى التواصل معنا عبر:</p>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="https://wa.me/963934766960?text=مرحباً، أرغب في الاستفسار عن سعر هذا المنتج: \n ${encodedProductUrl}" 
-                            target="_blank" class="btn btn-primary" style="background: #25D366;">
-                                <i class="fab fa-whatsapp"></i> واتساب
+                    <div class="contact-section-elegant">
+                        <div class="contact-header">
+                            <i class="fas fa-headset"></i>
+                            <h3>للحصول على السعر والمعلومات</h3>
+                        </div>
+                        <p>يرجى التواصل معنا عبر إحدى الطرق التالية</p>
+                        <div class="contact-buttons">
+                            <a href="https://wa.me/963934766960?text=${encodeURIComponent(`مرحباً، أرغب في الاستفسار عن سعر منتج: ${product.name}\n${productUrl}`)}" 
+                               target="_blank" 
+                               class="contact-btn whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>واتساب</span>
                             </a>
+                            <button class="contact-btn telegram" id="contactViaTelegramBtn">
+                                <i class="fab fa-telegram"></i>
+                                <span>تيليجرام</span>
+                            </button>
+                            <button class="contact-btn phone" id="contactViaPhoneBtn">
+                                <i class="fas fa-phone"></i>
+                                <span>اتصال</span>
+                            </button>
                         </div>
                     </div>
                 ` : ''}
             </div>
         </div>
     `;
+
+    // إضافة الأنماط المتقدمة للهاتف
+    addMobileElegantStyles();
     
-    // تحسين معرض الصور للهواتف (إضافة swipe)
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const galleryMain = document.querySelector('.gallery-main');
+    // تهيئة المعرض والتفاعلات
+    initializeGallery(product);
+    initializeActions(product, isOrderable);
+}
+
+// دالة إضافة الأنماط الأنيقة للهاتف
+function addMobileElegantStyles() {
+    if (document.getElementById('mobile-elegant-styles')) return;
+    
+    const styles = document.createElement('style');
+    styles.id = 'mobile-elegant-styles';
+    styles.textContent = `
+        /* زر العودة الأنيق */
+        .mobile-back-header {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .back-btn-elegant {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 10px 16px;
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn-elegant:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .share-btn-elegant {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn-elegant:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        /* حاوية التفاصيل الأنيقة */
+        .detail-container-elegant {
+            margin-top: 60px;
+            padding: 16px;
+            padding-bottom: 100px;
+        }
+
+        /* معرض الصور المحسن */
+        .product-gallery-elegant {
+            margin-bottom: 24px;
+        }
+
+        .gallery-main-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image-elegant {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-nav.prev {
+            left: 12px;
+        }
+
+        .gallery-nav.next {
+            right: 12px;
+        }
+
+        .gallery-nav:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .image-counter-elegant {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-thumbs-elegant {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .gallery-thumbs-elegant::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumb-elegant {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .thumb-elegant.active {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .thumb-elegant img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* معلومات المنتج */
+        .product-info-elegant {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.5), rgba(30, 41, 59, 0.3));
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .product-header-elegant {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .category-badge-elegant {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .price-tag-elegant {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .product-title-elegant {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            background: linear-gradient(135deg, var(--text), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-on-request-elegant {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .price-on-request-elegant i {
+            color: #f59e0b;
+            font-size: 20px;
+        }
+
+        .price-on-request-elegant span {
+            color: #fbbf24;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .section-title-elegant {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .section-title-elegant i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .product-description-elegant {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .features-grid-elegant {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .feature-item-elegant {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .feature-item-elegant i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .feature-item-elegant span {
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        /* أزرار الإجراءات */
+        .actions-section {
+            margin-top: 20px;
+        }
+
+        .primary-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary-elegant {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary-elegant:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary-elegant {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        /* قسم التواصل */
+        .contact-section-elegant {
+            margin-top: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .contact-header i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .contact-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .contact-section-elegant p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .contact-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .contact-btn.telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        .contact-btn.phone {
+            background: var(--primary);
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* تعديلات للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
+            .main-image-elegant {
+                height: 280px;
+            }
+            
+            .features-grid-elegant {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-title-elegant {
+                font-size: 20px;
+            }
+            
+            .price-tag-elegant {
+                font-size: 24px;
+            }
+            
+            .primary-actions {
+                flex-direction: column;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+            }
+        }
+    `;
+    
+    document.head.appendChild(styles);
+}
+
+// دالة تهيئة المعرض
+function initializeGallery(product) {
     const mainImage = document.getElementById('mainImage');
-    const thumbs = document.querySelectorAll('.thumb');
-    let currentImageIndex = 0;
+    const thumbs = document.querySelectorAll('.thumb-elegant');
+    const prevBtn = document.getElementById('prevImageBtn');
+    const nextBtn = document.getElementById('nextImageBtn');
+    const counter = document.getElementById('imageCounter');
     
-    // تحديث الصورة الرئيسية
-    function updateMainImage(index) {
+    let currentIndex = 0;
+    
+    function updateImage(index) {
         if (index >= 0 && index < product.images.length) {
-            currentImageIndex = index;
+            currentIndex = index;
             mainImage.src = product.images[index];
+            
             thumbs.forEach((thumb, i) => {
-                if (i === index) {
-                    thumb.classList.add('active');
-                } else {
-                    thumb.classList.remove('active');
-                }
+                thumb.classList.toggle('active', i === index);
             });
+            
+            if (counter) {
+                counter.innerHTML = `<span>${index + 1}/${product.images.length}</span>`;
+            }
         }
     }
     
-    // إضافة حدث اللمس للتمرير بين الصور (swipe)
-    if (galleryMain) {
-        galleryMain.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        galleryMain.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            const swipeDistance = touchEndX - touchStartX;
-            
-            if (Math.abs(swipeDistance) > 50) { // أقل مسافة للسحب
-                if (swipeDistance > 0) {
-                    // سحب لليمين -> الصورة السابقة
-                    if (currentImageIndex > 0) {
-                        updateMainImage(currentImageIndex - 1);
-                    }
-                } else {
-                    // سحب لليسار -> الصورة التالية
-                    if (currentImageIndex < product.images.length - 1) {
-                        updateMainImage(currentImageIndex + 1);
-                    }
-                }
-            }
-        });
-    }
-    
-    // إضافة أزرار تنقل للهواتف
-    const galleryContainer = document.querySelector('.product-gallery');
-    if (galleryContainer && product.images.length > 1) {
-        // إضافة مؤشر رقم الصورة الحالية
-        const imageCounter = document.createElement('div');
-        imageCounter.className = 'image-counter';
-        imageCounter.innerHTML = `<span>1 / ${product.images.length}</span>`;
-        galleryContainer.appendChild(imageCounter);
-        
-        // تحديث العداد عند تغيير الصورة
-        const updateCounter = () => {
-            imageCounter.innerHTML = `<span>${currentImageIndex + 1} / ${product.images.length}</span>`;
-        };
-        
-        // إضافة مراقبة لتحديث العداد
-        const observer = new MutationObserver(() => {
-            updateCounter();
-        });
-        observer.observe(mainImage, { attributes: true, attributeFilter: ['src'] });
-        updateCounter();
-    }
-    
-    // إضافة حدث النقر على الصور المصغرة
     thumbs.forEach((thumb, index) => {
-        thumb.addEventListener('click', (e) => {
-            e.stopPropagation();
-            updateMainImage(index);
-        });
+        thumb.addEventListener('click', () => updateImage(index));
     });
     
-    // تحسين الأزرار للهواتف (إزالة النص الزائد)
-    const detailActions = document.querySelector('.detail-actions');
-    if (window.innerWidth <= 480) {
-        const buttons = detailActions.querySelectorAll('button');
-        buttons.forEach(btn => {
-            const span = btn.querySelector('span');
-            if (span && btn.id !== 'bookNowDetailBtn') {
-                // إبقاء النص المختصر للأزرار الثانوية
-                if (btn.id === 'shareProductDetailBtn') span.textContent = 'مشاركة';
-                if (btn.id === 'backToHomeDetailBtn') span.textContent = 'رجوع';
-            }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            updateImage(currentIndex > 0 ? currentIndex - 1 : product.images.length - 1);
         });
     }
     
-    // إضافة زر مشاركة سريع (للهواتف التي تدعم Web Share)
-    if (navigator.share && window.innerWidth <= 768) {
-        const shareBtn = document.getElementById('shareProductDetailBtn');
-        if (shareBtn) {
-            shareBtn.addEventListener('click', () => shareProduct(product));
-        }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            updateImage(currentIndex < product.images.length - 1 ? currentIndex + 1 : 0);
+        });
     }
     
-    // إضافة أحداث إضافية للمنتجات غير القابلة للطلب
-    if (!isOrderable) {
-        const contactViaFormBtn = document.getElementById('contactViaFormBtn');
-        if (contactViaFormBtn) {
-            contactViaFormBtn.addEventListener('click', () => {
-                showContactPage();
-                // ملء نموذج التواصل باسم المنتج
-                const messageField = document.getElementById('contactMessage');
-                if (messageField) {
-                    messageField.value = `الاستفسار عن سعر منتج: ${product.name}`;
-                }
-                window.scrollTo(0, 0);
-            });
-        }
-    }
+    // دعم السحب للمس
+    let touchStartX = 0;
+    mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
     
-    // ربط الأحداث للمنتجات القابلة للطلب فقط
+    mainImage.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                updateImage(currentIndex < product.images.length - 1 ? currentIndex + 1 : 0);
+            } else {
+                updateImage(currentIndex > 0 ? currentIndex - 1 : product.images.length - 1);
+            }
+        }
+    });
+}
+
+// دالة تهيئة الإجراءات
+function initializeActions(product, isOrderable) {
+    const backBtn = document.getElementById('backToHomeDetailBtn');
+    if (backBtn) backBtn.addEventListener('click', showHomePage);
+    
+    const shareBtn = document.getElementById('shareProductDetailBtn');
+    if (shareBtn) shareBtn.addEventListener('click', () => shareProduct(product));
+    
     if (isOrderable) {
         const addToCartBtn = document.getElementById('addToCartDetailBtn');
         if (addToCartBtn) addToCartBtn.addEventListener('click', () => addToCart(product));
@@ -3431,11 +4025,19 @@ function renderProductDetail(product) {
         if (bookNowBtn) bookNowBtn.addEventListener('click', () => openBookingModal(product));
     }
     
-    const shareBtn = document.getElementById('shareProductDetailBtn');
-    if (shareBtn) shareBtn.addEventListener('click', () => shareProduct(product));
+    const telegramBtn = document.getElementById('contactViaTelegramBtn');
+    if (telegramBtn) {
+        telegramBtn.addEventListener('click', () => {
+            window.open('https://t.me/+belA19EIKlpmZGQ0', '_blank');
+        });
+    }
     
-    const backBtn = document.getElementById('backToHomeDetailBtn');
-    if (backBtn) backBtn.addEventListener('click', showHomePage);
+    const phoneBtn = document.getElementById('contactViaPhoneBtn');
+    if (phoneBtn) {
+        phoneBtn.addEventListener('click', () => {
+            window.location.href = 'tel:+963934766960';
+        });
+    }
 }
 
     function shareProduct(product) {
@@ -3471,23 +4073,24 @@ function openBookingModal(product) {
     }
 
     // ========== Hash Routing ==========
-    function handleRouting() {
-        const hash = window.location.hash.slice(1);
-        if (hash.startsWith('product/')) {
-            const id = parseInt(hash.split('/')[1]);
-            if (!isNaN(id) && products.find(p => p.id === id)) {
-                navigateToProduct(id);
-            } else {
-                showHomePage();
-            }
-        } else if (hash === 'about') {
-            showAboutPage();
-        } else if (hash === 'contact') {
-            showContactPage();
+function handleRouting() {
+    const hash = window.location.hash.slice(1);
+    
+    if (hash.startsWith('product/')) {
+        const id = parseInt(hash.split('/')[1]);
+        if (!isNaN(id) && products.find(p => p.id === id)) {
+            navigateToProduct(id);
         } else {
             showHomePage();
         }
+    } else if (hash === 'about') {
+        showAboutPage();
+    } else if (hash === 'contact') {
+        showContactPage();
+    } else {
+        showHomePage();
     }
+}
 
     // دالة مشاركة الموقع
     async function shareLocation(inputId) {
@@ -3864,6 +4467,18 @@ gridButtons.forEach(btn => {
             await sendContactMessage(formData);
         });
     }
+
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (currentPage === 'home') {
+            // استخدام debounce لتحسين الأداء
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const scrollY = window.scrollY;
+                sessionStorage.setItem('dentavio_home_scroll', scrollY);
+            }, 100);
+        }
+    }, { passive: true });
 }
     // معالجة نموذج التواصل
 async function sendContactMessage(formData) {
@@ -3916,12 +4531,46 @@ ${formData.message}
     function init() {
         loadUserData();
         loadCart();
+        loadFilterState();
+
+    // استعادة موقع التمرير المحفوظ من sessionStorage
+    const savedScroll = sessionStorage.getItem('dentavio_home_scroll');
+    if (savedScroll) {
+        homeScrollPosition = parseInt(savedScroll, 10);
+        // لا نستعيد التمرير هنا مباشرة لأن showHomePage ستستعيده
+    }
+
         renderProducts(products);
         initEventListeners();
         window.addEventListener('hashchange', handleRouting);
+
+        const hash = window.location.hash.slice(1);
+    if (!hash || hash === '') {
+        // إذا كنا في الصفحة الرئيسية، نستعيد التمرير المحفوظ
+        const savedScroll = sessionStorage.getItem('dentavio_home_scroll');
+        if (savedScroll) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: parseInt(savedScroll, 10),
+                    behavior: 'instant'
+                });
+            }, 50);
+        }
+    }
         handleRouting();
     }
-    
+        // تحميل الفلاتر المحفوظة وتطبيقها
+    setTimeout(() => {
+        loadFilterState(); // تحميل القيم في الحقول
+        applySavedFilters(); // تطبيق الفلترة إذا كانت موجودة
+    }, 100);
+
+    window.addEventListener('scroll', () => {
+        if (currentPage === 'home') {
+            homeScrollPosition = window.scrollY;
+            sessionStorage.setItem('dentavio_home_scroll', homeScrollPosition);
+        }
+    });
     init();
 </script>
 </body>
