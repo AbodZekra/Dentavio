@@ -3,7 +3,7 @@ const products = [
         id: 1,
         name: "علبة سنابل معدنية",
         category: "tools",
-        price: "12,500 $",
+        price: "$",
         description: "علبة معدنية معدنية عالية الجودة",
         features: ["معدن مقاوم للصدأ ومتين", "تصميم أنيق وعصري", "سعة جيدة لتخزين السنابل", "سهلة التنظيف والتعقيم", "مناسبة للاستخدام في العيادات والمستشفيات", "الوان متعددة وجذابة"],
         images: [
@@ -14,7 +14,7 @@ const products = [
         id: 2,
         name: "علبة سنابل معدنية حجم صغير مع غطاء",
         category: "tools",
-        price: "8,900 $",
+        price: " $",
         description: "علبة سنابل معدنية صغيرة الحجم مع غطاء محكم الإغلاق، مصممة لتوفير حماية مثالية للسنابل أثناء التخزين والنقل.",
         features: ["معدن عالي الجودة مقاوم للصدأ", "تصميم مدمج وصغير الحجم", "غطاء محكم الإغلاق لحماية السنابل", "مهمة لحفظ السنابل بعد التعقيم", "مناسبة للاستخدام في العيادات والمستشفيات", "ألوان متعددة وجذابة"],
         images: [
@@ -1445,6 +1445,226 @@ const products = [
         description: "",
         features: [""],
         images: ["./imgprodects/prodect216.jpeg"]
+    },
+    
+                                            {
+        id:217 ,
+        name: "حبوب تعقيم الفم الف حبة",
+        category: "materials",
+        price: "15 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect217.jpeg"]
+    },
+
+            {
+        id:218 ,
+        name: "معقم ادوات",
+        category: "materials",
+        price: "12 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect218.jpeg"]
+    },
+
+            {
+        id:219 ,
+        name: "معقم ادوات",
+        category: "materials",
+        price: "$",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect219.jpeg"]
+    },
+
+            {
+        id:220 ,
+        name: "كيت الكومبوزيت من شركة كير",
+        category: "materials",
+        price: "60 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect220.jpeg","./imgprodects/prodect221.jpeg","./imgprodects/prodect222.jpeg"]
+    },
+
+            {
+        id:223 ,
+        name: "كيس الشاش",
+        category: "materials",
+        price: "2.5 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect223.jpeg"]
+    },
+
+            {
+        id:224 ,
+        name: "مطبق بلاستيك",
+        category: "tools",
+        price: "8 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect224.jpeg"]
+    },
+
+            {
+        id:225 ,
+        name: "مطبق معدن",
+        category: "tools",
+        price: "10 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect225.jpeg"]
+    },
+
+            {
+        id:226 ,
+        name: "تورش",
+        category: "tools",
+        price: "10 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect226.jpeg"]
+    },
+
+            {
+        id:227 ,
+        name: "كمبوزيت سيال nova",
+        category: "materials",
+        price: "11 $",
+        description: "4 تيوب",
+        features: [""],
+        images: ["./imgprodects/prodect227.jpeg"]
+    },
+
+            {
+        id:228 ,
+        name: "Nova mta",
+        category: "materials",
+        price: "14 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect228.jpeg"]
+    },
+
+            {
+        id:229 ,
+        name: "مخدر بدون ادرينالين 50 امبولة",
+        category: "materials",
+        price: "25 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect229.jpeg"]
+    },
+
+            {
+        id:230 ,
+        name: "Cera seal Meta",
+        category: "materials",
+        price: "58 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect230.jpeg"]
+    },
+
+            {
+        id:231 ,
+        name: "Zeta plus مجموعة سيلكون",
+        category: "materials",
+        price: "6 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect231.jpeg"]
+    },
+
+                {
+        id:232 ,
+        name: "Zink phosphate",
+        category: "materials",
+        price: "6 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect232.jpeg"]
+    },
+
+            {
+        id:233 ,
+        name: "أسمنت الصاق Meron",
+        category: "materials",
+        price: "36 $",
+        description: "تثبيت قوي وموثوق للترميمات",
+        features: [""],
+        images: ["./imgprodects/prodect233.jpeg"]
+    },
+
+            {
+        id:234 ,
+        name: "بولبتك الروسي",
+        category: "materials",
+        price: "15 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect234.jpeg"]
+    },
+
+                {
+        id:235 ,
+        name: "Vioseal ( root canal sealing material )",
+        category: "materials",
+        price: "15 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect235.jpeg"]
+    },
+
+            {
+        id:236 ,
+        name: "قاتل عصب روسي",
+        category: "materials",
+        price: "7 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect236.jpeg"]
+    },
+
+            {
+        id:237 ,
+        name: "عازل لثة امركي",
+        category: "materials",
+        price: "4.5 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect237.jpeg"]
+    },
+
+            {
+        id:238 ,
+        name: "MTA RPPT _X PRO",
+        category: "materials",
+        price: "15 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect238.jpeg"]
+    },
+
+            {
+        id:239 ,
+        name: "مخدر موضعي",
+        category: "materials",
+        price: "3 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect239.jpeg"]
+    },
+
+            {
+        id:240 ,
+        name: "Disposable",
+        category: "materials",
+        price: "7 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect240.jpeg"]
     },
 
 ];
