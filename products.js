@@ -1658,14 +1658,35 @@ const products = [
     },
 
             {
-        id:240 ,
-        name: "Disposable",
-        category: "materials",
-        price: "7 $",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect240.jpeg"]
+        id:241 ,
+        name: "كرسي اسنان ماركه Rostar",
+        category: "chairs",
+        price: "2800 $",
+        description: "ماركه Rostar موديل RS1Pro",
+        features: ["كافترون ضوئي داخلي","جهاز تصليب ضوئي داخلي"],
+        images: ["./imgprodects/prodect241.jpeg","./imgprodects/prodect242.jpeg"]
     },
+
+                {
+        id:243 ,
+        name: "كرسي اسنان ماركه Rostar",
+        category: "chairs",
+        price: "2300 $",
+        description: "ماركه Rostar موديل Rs1 كافترون ضوئي داخلي جهاز تصليب ضوئي داخلي",
+        features: ["كافترون ضوئي داخلي"," جهاز تصليب ضوئي داخلي"],
+        images: ["./imgprodects/prodect243.jpeg","./imgprodects/prodect244.jpeg"]
+    },
+
+                {
+        id:242 ,
+        name: "كرسي اسنان ماركه suntem",
+        category: "chairs",
+        price: "3300 $",
+        description: "ماركه suntem موديل ST-D302",
+        features: ["كافترون ضوئي داخلي","جهاز تصليب ضوئي داخلي"],
+        images: ["./imgprodects/prodect245.jpeg"]
+    },
+
 
 ];
 
