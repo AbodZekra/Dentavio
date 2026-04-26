@@ -2492,9 +2492,7 @@ function getRandomProducts() {
     return [...products]; // بدون ترتيب عشوائي
     // return shuffleArray([...products]); مع ترتيب عشوائي
 }
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-}
+
     // ========== Cart State ==========
     let cartDelivery = {
     enabled: false,
