@@ -629,26 +629,30 @@
         }
 
         /* Toast */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 5000;
-        }
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    z-index: 5000;
+}
 
-        .toast {
-            background: var(--dark-card);
-            border-right: 4px solid var(--primary);
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: var(--shadow);
-            transform: translateX(120%);
-            transition: transform 0.3s ease;
-        }
+.toast {
+    background: var(--dark-card);
+    border-right: 1px solid var(--primary);
+    padding: 2px 20px;
+    margin-bottom: 10px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
 
         .toast.show {
             transform: translateX(0);
@@ -1357,28 +1361,7 @@ html {
 }
 
 /* مودال السلة */
-.cart-modal {
-    position: fixed;
-    bottom: 100px;
-    left: 30px;
-    width: 350px;
-    max-width: calc(100vw - 60px);
-    background: var(--dark-card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    z-index: 1001;
-    transform: translateY(20px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
 
-.cart-modal.open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-}
 
 .cart-header {
     padding: 15px 20px;
@@ -1394,16 +1377,24 @@ html {
 }
 
 .close-cart {
-    background: none;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     color: var(--text-muted);
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     transition: var(--transition);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close-cart:hover {
     color: var(--primary);
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
 .cart-items {
@@ -1643,32 +1634,7 @@ html {
     background: var(--primary-dark);
 }
 /* مودال السلة مع شريط انزلاق */
-.cart-modal {
-    position: fixed;
-    bottom: 100px;
-    left: 30px;
-    width: 350px;
-    max-width: calc(100vw - 60px);
-    max-height: 80vh; /* أقصى ارتفاع للمودال */
-    background: var(--dark-card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    z-index: 1001;
-    transform: translateY(20px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* منع overflow خارج المودال */
-}
 
-.cart-modal.open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-}
 
 /* تثبيت الرأس في الأعلى */
 .cart-header {
@@ -2070,6 +2036,221 @@ html {
         font-size: 1.2rem;
     }
 }
+
+/* ===== أنيميشن انتفاخ السلة ===== */
+@keyframes cartBounce {
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.35);
+    }
+    30% {
+        transform: scale(0.9);
+    }
+    45% {
+        transform: scale(1.2);
+    }
+    60% {
+        transform: scale(0.95);
+    }
+    75% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cart-icon.bouncing {
+    animation: cartBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* تأثير نبض للشارة (العدد) */
+@keyframes badgePop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+        background: #ff4444;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cart-badge.popping {
+    animation: badgePop 0.4s ease;
+}
+
+/* تأثير وميض خفيف على الأيقونة */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(16, 185, 129, 0.6), 
+                    0 0 40px rgba(16, 185, 129, 0.3);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+}
+
+.cart-icon.glowing {
+    animation: glowPulse 1.5s ease infinite;
+}
+
+
+.cart-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background: var(--dark-card);
+    border-radius: 0;
+    border: none;
+    box-shadow: var(--shadow);
+    z-index: 1001;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    clip-path: none;
+    will-change: transform, opacity;
+}
+
+.cart-modal.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    animation: none;
+}
+
+
+/* تأثير الجسيمات المتطايرة */
+
+
+.cart-modal.open::before {
+    opacity: 1;
+    transition: opacity 0.5s 0.2s ease;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .cart-modal {
+        /* لا تغيير - تبقى شاشة كاملة */
+    }
+    
+    .cart-modal .cart-header {
+        padding: 16px 20px;
+    }
+    
+    .cart-modal .cart-items {
+        padding: 16px 20px;
+    }
+    
+    .cart-modal .cart-footer {
+        padding: 16px 20px;
+    }
+}
+
+/* تأثير انتقالي للخلفية عند فتح السلة */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    transition: background 0.5s ease;
+    z-index: 1000;
+}
+
+body.cart-open::after {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* حاوية السلة الداخلية */
+.cart-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* تحسين الرأس للشاشة الكاملة */
+.cart-modal .cart-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--dark-card);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-radius: 0;
+}
+
+/* تحسين قائمة العناصر للشاشة الكاملة */
+.cart-modal .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 24px;
+    min-height: 0;
+    max-height: none;
+}
+
+/* تحسين الفوتر للشاشة الكاملة */
+.cart-modal .cart-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--dark-card);
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    border-radius: 0;
+}
+
+/* تحسين خيارات التوصيل والدفع */
+.cart-modal .cart-options {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-group-wrapper {
+    margin: 10px 0;
+}
+
+.checkbox-section-title {
+    display: block;
+    font-size: 9px;
+    font-weight: 600;
+    color: #ef4444;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
     </style>
 </head>
 <body>
@@ -2305,7 +2486,7 @@ html {
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-phone"></i> رقم الهاتف *</label>
-                            <input type="text" id="contactPhone" required placeholder="+963XXXXXXXXX">
+                            <input type="text" id="contactPhone" required placeholder="+963.......">
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-comment"></i> الرسالة *</label>
@@ -2340,15 +2521,18 @@ html {
                         <input type="text" id="clientPhone" required pattern="^[\d+]+$" title="أرقام فقط مع علامة +">
                         <button type="button" class="clear-phone-btn" id="clearPhoneBtn"><i class="fas fa-times"></i></button>
                     </div>
-                    <div class="checkbox-group" style="margin-top: 8px;">
+                    <!-- <div class="checkbox-group" style="margin-top: 8px;">
                         <input type="checkbox" id="saveInfoCheckbox" checked>
                         <label>حفظ معلوماتي للمستقبل</label>
-                    </div>
+                    </div> -->
                 </div>
                 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="deliveryCheckbox">
-                    <label><i class="fas fa-truck"></i> طلب خدمة التوصيل</label>
+                <div class="checkbox-group-wrapper">
+                    <label class="checkbox-section-title">حدد لطلب الخدمة</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="deliveryCheckbox">
+                        <label><i class="fas fa-truck"></i> طلب خدمة التوصيل</label>
+                    </div>
                 </div>
                 <div class="option-content" id="deliveryOptions">
                     <div class="form-group">
@@ -2360,9 +2544,12 @@ html {
                     </div>
                 </div>
                 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="paymentCheckbox">
-                    <label><i class="fas fa-credit-card"></i> الدفع قبل الاستلام (شام كاش)</label>
+                <div class="checkbox-group-wrapper">
+                    <label class="checkbox-section-title">عند التحديد سيطلب الدفع قبل الاستلام وإلا فإن الدفع عند الاستلام</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="paymentCheckbox">
+                        <label><i class="fas fa-credit-card"></i> الدفع قبل الاستلام (شام كاش)</label>
+                    </div>
                 </div>
                 <div class="option-content" id="paymentOptions">
                     <div class="form-group">
@@ -2446,9 +2633,9 @@ html {
 </div>
 
 <!-- مودال السلة -->
-<!-- مودال السلة -->
 <div class="cart-modal" id="cartModal">
-    <div class="cart-header">
+    <div class="cart-container">
+        <div class="cart-header">
         <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات 
             <span id="cartItemsCount" style="font-size: 12px; color: var(--primary); margin-right: 8px;"></span>
         </h3>
@@ -2468,6 +2655,7 @@ html {
     <!-- منطقة الفوتر -->
     <div class="cart-footer" id="cartFooter">
         <!-- سيتم عرض الإجمالي وزر الإرسال هنا -->
+        </div>
     </div>
 </div>
 
@@ -2559,9 +2747,49 @@ function addToCart(product) {
         showToast(`تمت إضافة ${product.name} إلى السلة`, 'success');
     }
     
+    // ✨ تفعيل أنيميشن السلة
+    animateCartIcon();
+    
     saveCart();
 }
-
+// ========== دالة أنيميشن السلة ==========
+function animateCartIcon() {
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartBadge = document.getElementById('cartBadge');
+    
+    if (!cartIcon) return;
+    
+    // إزالة الكلاسات القديمة (إذا كانت موجودة)
+    cartIcon.classList.remove('bouncing', 'glowing');
+    if (cartBadge) cartBadge.classList.remove('popping');
+    
+    // إعادة تشغيل الأنيميشن (نحتاج trigger reflow)
+    void cartIcon.offsetWidth;
+    
+    // إضافة كلاس الانتفاخ
+    cartIcon.classList.add('bouncing');
+    
+    // إضافة تأثير النبض للشارة
+    if (cartBadge) {
+        void cartBadge.offsetWidth;
+        cartBadge.classList.add('popping');
+    }
+    
+    // إضافة تأثير الوميض المؤقت
+    setTimeout(() => {
+        cartIcon.classList.add('glowing');
+    }, 300);
+    
+    // إزالة الأنيميشن بعد الانتهاء
+    cartIcon.addEventListener('animationend', function() {
+        cartIcon.classList.remove('bouncing');
+    }, { once: true });
+    
+    // إيقاف الوميض بعد 2 ثانية
+    setTimeout(() => {
+        cartIcon.classList.remove('glowing');
+    }, 2300);
+}
 // إزالة منتج من السلة
 function removeFromCart(productId) {
     const product = cart.find(item => item.id === productId);
@@ -2618,12 +2846,20 @@ function updateCartUI() {
         `).join('');
         
         // إضافة أحداث الحذف
-        document.querySelectorAll('.cart-item-remove').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = parseInt(btn.dataset.id);
-                removeFromCart(id);
-            });
-        });
+
+document.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault(); // منع السلوك الافتراضي
+        e.stopPropagation(); // منع انتشار الحدث للأعلى
+        
+        const id = parseInt(btn.dataset.id);
+        
+        // تأخير الحذف قليلاً لضمان عدم تأثيره على معالجة الحدث
+        setTimeout(() => {
+            removeFromCart(id);
+        }, 10);
+    });
+});
     }
     
     // حساب الإجمالي
@@ -2651,7 +2887,7 @@ function updateCartUI() {
                 <div class="cart-option">
                     <label>
                         <input type="checkbox" id="cartPaymentCheckbox" ${cartPayment.enabled ? 'checked' : ''}>
-                        <i class="fas fa-credit-card"></i> الدفع عبر شام كاش
+                        <i class="fas fa-credit-card"></i> الدفع قبل الاستلام (شام كاش)
                     </label>
                     <div class="cart-option-content" id="cartPaymentContent" ${cartPayment.enabled ? 'style="display: block;"' : ''}>
                         <input type="text" id="cartPaymentName" placeholder="الاسم المسجل في شام كاش" value="${cartPayment.name || ''}">
@@ -2874,7 +3110,9 @@ ${cartItemsList}
             cartPayment = { enabled: false, name: '' };
             saveCart();
             // إغلاق مودال السلة
-            document.getElementById('cartModal')?.classList.remove('open');
+           setTimeout(() => {
+                closeCartWithAnimation();
+            }, 500);
         } else {
             showToast('❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى', 'error');
         }
@@ -2900,19 +3138,19 @@ ${cartItemsList}
     };
 
     // ========== Toast System ==========
-    function showToast(message, type = 'success') {
-        const container = document.getElementById('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
-        toast.innerHTML = `<span>${icons[type] || '✅'}</span><span>${message}</span>`;
-        container.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 10);
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 4000);
-    }
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+    toast.innerHTML = `<span>${icons[type] || '✅'}</span><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
 
     // ========== User Data Management ==========
     function loadUserData() {
@@ -3050,7 +3288,9 @@ ${cartItemsList}
             
             if (response.ok && data.ok) {
                 showToast('✅ تم إرسال طلب الحجز بنجاح! سنتواصل معك قريبًا.', 'success');
-                document.getElementById('bookingModal').classList.remove('open');
+                setTimeout(() => {
+                    closeCartWithAnimation();
+                }, 500);
                 document.body.style.overflow = 'auto';
             } else {
                 console.error('Telegram error:', data);
@@ -4152,27 +4392,73 @@ gridButtons.forEach(btn => {
     });
 });
 
-    if (cartFloating && cartModal) {
-        cartFloating.addEventListener('click', (e) => {
-            e.stopPropagation();
-            cartModal.classList.toggle('open');
-        });
-    }
+if (cartFloating && cartModal) {
+    cartFloating.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCart();
+    });
+}
 
-    if (closeCartBtn && cartModal) {
-        closeCartBtn.addEventListener('click', () => {
-            cartModal.classList.remove('open');
-        });
+// إضافة دالة toggleCart
+function toggleCart() {
+    const isOpening = !cartModal.classList.contains('open');
+    
+    if (isOpening) {
+        // فتح السلة
+        document.body.classList.add('cart-open');
+        document.body.style.overflow = 'hidden'; // منع تمرير الصفحة
+        cartModal.classList.add('open');
+    } else {
+        // إغلاق السلة
+        closeCartWithAnimation();
     }
+}
+
+if (closeCartBtn && cartModal) {
+    closeCartBtn.addEventListener('click', () => {
+        closeCartWithAnimation();
+    });
+}
+
+// دالة إغلاق السلة مع أنيميشن
+// دالة إغلاق السلة مع أنيميشن
+function closeCartWithAnimation() {
+    // إعادة تمكين التمرير فوراً
+    document.body.style.overflow = 'auto';
+    document.body.classList.remove('cart-open');
+    
+    // تشغيل أنيميشن الإغلاق
+    cartModal.style.transform = 'translateY(100%)';
+    cartModal.style.opacity = '0';
+    
+    // إزالة كلاس open بعد انتهاء الأنيميشن
+    setTimeout(() => {
+        cartModal.classList.remove('open');
+        // تنظيف الستايلات المتبقية
+        cartModal.style.transform = '';
+        cartModal.style.opacity = '';
+        cartModal.style.visibility = '';
+    }, 500);
+}
 
     // إغلاق المودال عند الضغط خارجه
-    document.addEventListener('click', (e) => {
-        if (cartModal && cartModal.classList.contains('open')) {
-            if (!cartModal.contains(e.target) && !cartFloating?.contains(e.target)) {
-                cartModal.classList.remove('open');
-            }
+// إغلاق المودال عند الضغط خارجه - نسخة محسنة
+document.addEventListener('click', (e) => {
+    if (cartModal && cartModal.classList.contains('open')) {
+        // التحقق من أن النقر ليس على أيقونة السلة العائمة
+        if (cartFloating && cartFloating.contains(e.target)) {
+            return; // لا تغلق إذا كان النقر على أيقونة السلة
         }
-    });
+        
+        // التحقق من أن النقر ليس داخل مودال السلة
+        if (cartModal.contains(e.target)) {
+            return; // لا تغلق إذا كان النقر داخل السلة
+        }
+        
+        // إذا وصلنا هنا، النقر كان خارج السلة تماماً
+        closeCartWithAnimation();
+    }
+});
     // Sidebar
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
@@ -4298,18 +4584,55 @@ gridButtons.forEach(btn => {
     }
     
     // Phone input clear
-    const phoneInput = document.getElementById('clientPhone');
-    const clearBtn = document.getElementById('clearPhoneBtn');
-    if (phoneInput && clearBtn) {
-        phoneInput.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^\d+]/g, '');
-            clearBtn.style.display = e.target.value ? 'flex' : 'none';
-        });
-        clearBtn.addEventListener('click', () => {
-            phoneInput.value = '';
-            clearBtn.style.display = 'none';
-        });
+// Phone input clear & format
+// ========== دالة مساعدة لتنسيق الهاتف ==========
+function formatPhoneInput(value) {
+    // إزالة جميع الأحرف غير المسموحة (فقط أرقام و +)
+    value = value.replace(/[^\d+]/g, '');
+    
+    // إذا بدأ بـ 0، حوله إلى +963
+    if (value.startsWith('0') && !value.startsWith('+963')) {
+        value = '+963' + value.substring(1);
     }
+    
+    return value;
+}
+
+// ========== تطبيق التنسيق على جميع حقول الهاتف ==========
+const phoneFields = [
+    { inputId: 'clientPhone', clearBtnId: 'clearPhoneBtn' },
+    { inputId: 'contactPhone', clearBtnId: null },
+    { inputId: 'editPhone', clearBtnId: null }
+];
+
+phoneFields.forEach(field => {
+    const input = document.getElementById(field.inputId);
+    if (!input) return;
+    
+    // إضافة حدث input للتنسيق
+    input.addEventListener('input', (e) => {
+        e.target.value = formatPhoneInput(e.target.value);
+        
+        // إظهار/إخفاء زر المسح إذا وجد
+        if (field.clearBtnId) {
+            const clearBtn = document.getElementById(field.clearBtnId);
+            if (clearBtn) {
+                clearBtn.style.display = e.target.value ? 'flex' : 'none';
+            }
+        }
+    });
+    
+    // ربط زر المسح إذا وجد
+    if (field.clearBtnId) {
+        const clearBtn = document.getElementById(field.clearBtnId);
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                clearBtn.style.display = 'none';
+            });
+        }
+    }
+});
     
     // Share location
     const shareLocationBtn = document.getElementById('shareLocationBtn');

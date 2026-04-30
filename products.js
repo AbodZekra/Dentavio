@@ -3,7 +3,7 @@ const products = [
         id: 1,
         name: "علبة سنابل معدنية",
         category: "tools",
-        price: "$",
+        price: "5 $",
         description: "علبة معدنية معدنية عالية الجودة",
         features: ["معدن مقاوم للصدأ ومتين", "تصميم أنيق وعصري", "سعة جيدة لتخزين السنابل", "سهلة التنظيف والتعقيم", "مناسبة للاستخدام في العيادات والمستشفيات", "الوان متعددة وجذابة"],
         images: [
@@ -14,7 +14,7 @@ const products = [
         id: 2,
         name: "علبة سنابل معدنية حجم صغير مع غطاء",
         category: "tools",
-        price: " $",
+        price: "5 $",
         description: "علبة سنابل معدنية صغيرة الحجم مع غطاء محكم الإغلاق، مصممة لتوفير حماية مثالية للسنابل أثناء التخزين والنقل.",
         features: ["معدن عالي الجودة مقاوم للصدأ", "تصميم مدمج وصغير الحجم", "غطاء محكم الإغلاق لحماية السنابل", "مهمة لحفظ السنابل بعد التعقيم", "مناسبة للاستخدام في العيادات والمستشفيات", "ألوان متعددة وجذابة"],
         images: [
@@ -197,7 +197,7 @@ const products = [
         id: 19,
         name: "مطاط حاجز",
         category: "materials",
-        price: "$",
+        price: "6.5 $",
         description: "مطاط حاجز عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
         features: ["مطاط مقاوم للادوات الحادة "," مناسب للعمليات الجراحية "],
         images: ["./imgprodects/prodect19.jpeg"]
@@ -207,7 +207,7 @@ const products = [
         id: 20,
         name: "علب معدنية سنابل مع غطاء (الحجم الكبير)",
         category: "tools",
-        price: "6.5 $",
+        price: "5.5 $",
         description: "علبة معدنية معدنية عالية الجودة",
         features: ["معدن مقاوم للصدأ ومتين", "تصميم أنيق وعصري", "سعة جيدة لتخزين السنابل", "سهلة التنظيف والتعقيم", "مناسبة للاستخدام في العيادات والمستشفيات", "الوان متعددة وجذابة"],
         images: [
@@ -219,7 +219,7 @@ const products = [
         id: 21,
         name: "مسطرة لبية وحامل مبارد",
         category: "tools",
-        price: " $",
+        price: "2.5 $",
         description: "مسطرة لبية وحامل مبارد عالي الجودة مصمم للاستخدام في العيادات السنية.",
         features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
         images: [
@@ -273,9 +273,9 @@ const products = [
 
                     {
         id: 26,
-        name: "سنابل جودة عالية",
+        name: "ظرف سنابل",
         category: "tools",
-        price: "$",
+        price: "2 $",
         description: "سنابل عالية الجودة , ممتازة للإستخدامات العامة ",
         features: ["مقاومة للصدأ و التآكل", "تصميم متين وعملي", "متوفرة بأحجام مختلفة لتلبية جميع الاحتياجات"],
         images: ["./imgprodects/prodect26.jpeg"]
@@ -315,7 +315,7 @@ const products = [
         id: 30,
         name: "زيت قبضة",
         category: "materials",
-        price: "$",
+        price: "5 $",
         description: "علبة زيت ميكانيكي يدوية للحفاظ على أدواتك في حالة ممتازة. هذا الزيت عالي الجودة مصمم لتقليل الاحتكاك ومنع الصدأ، مما يطيل عمر أدواتك ويضمن أدائها الأمثل في كل استخدام.",
         features: ["الحفاظ على أدواتك في حالة ممتازة", "تقليل الاحتكاك ومنع الصدأ", "تطيل عمر أدواتك وتضمن أدائها الأمثل"],
         images: ["./imgprodects/prodect30.jpeg"]
@@ -325,7 +325,7 @@ const products = [
         id: 31,
         name: "أطقم فحص صيني",
         category: "tools",
-        price: "1.75 $",
+        price: "2 $",
         description: "أطقم فحص صيني عالي الجودة مصمم للاستخدام في العيادات السنية.",
         features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
         images: ["./imgprodects/prodect31.jpeg"]
@@ -355,7 +355,7 @@ const products = [
         id: 34,
         name: "فراشي بوليش أسنان",     
         category: "tools",
-        price: "$",
+        price: "7 $",
         description: "فراشي بوليش أسنان عالي الجودة مصمم للاستخدام في العيادات السنية.",
         features: ["جميع الموديلات لتحقيق أفضل النتائج", "مصنوع من مواد عالية الجودة"],
         images: ["./imgprodects/prodect34.jpeg"]
@@ -365,9 +365,9 @@ const products = [
         id: 35,
         name: "طقم باينات باكستاني",
         category: "tools",
-        price: "$",
+        price: "35 $",
         description: "طقم باينات باكستاني عالي الجودة مصمم للاستخدام في العيادات السنية.",
-        features: ["تصميم مريح وسهل الاستخدام", "معدن مقاوم للصدأ"],
+        features: ["تصميم مريح وسهل الاستخدام", "معدن مقاوم للصدأ","9 قطع"],
         images: ["./imgprodects/prodect35.jpeg"]
     },
 
@@ -395,7 +395,7 @@ const products = [
         id: 38,
         name: "جهاز روتري سمارت 9انظمة",
         category: "devices",
-        price: "70 $",
+        price: "75 $",
         description: "جهاز روتري سمارت (9 انظمة) عالي الجودة , مزود بجميع الملحقات",
         features: ["جميع الملحقات اللازمة للاستخدام", "موديل مميز وعملي"],
         images: ["./imgprodects/prodect38.jpeg"]
@@ -485,9 +485,9 @@ const products = [
     
                             {
         id: 47,
-        name: "اقراص انهاء كمبوزيت",
+        name: "شرائط سحل كمبوزيت",
         category: "materials",
-        price: "$",
+        price: "5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect47.jpeg"]
@@ -777,9 +777,9 @@ const products = [
 
                                 {
         id: 76,
-        name: "كمبوزيت الGC",
+        name: "كمبوزيت الGC للاسنان الامامية",
         category: "materials",
-        price: "28 $",
+        price: "42 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect76.jpeg"]
@@ -787,9 +787,9 @@ const products = [
 
                                     {
         id: 215,
-        name: "كمبوزيت الGC",
+        name: "كمبوزيت الGC للاسنان الخلفية",
         category: "materials",
-        price: "38 $",
+        price: "28 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect76.jpeg"]
@@ -980,7 +980,7 @@ const products = [
         id: 101,
         name: "بوكس أدوات لطلاب طب الأسنان لتنظيم الادوات",
         category: "tools",
-        price: "20 $",
+        price: "18 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect101.jpeg","./imgprodects/prodect102.jpeg"]
@@ -1018,9 +1018,9 @@ const products = [
 
                                 {
         id: 106,
-        name: "Apex جيل عاشر وييد بيكر ماركة dte",
+        name: "Apex جيل عاشر  ماركة dte",
         category: "devices",
-        price: "190 $",
+        price: "180 $",
         description: " Apex جيل عاشر وييد بيكر ماركة dte عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
         features: [""],
         images: ["./imgprodects/prodect106.jpeg"]
@@ -1036,15 +1036,15 @@ const products = [
         images: ["./imgprodects/prodect107.jpeg"]
     },
 
-                                {
-        id: 108,
-        name: "Apex من شركة الايتيث",
-        category: "devices",
-        price: "155 $",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect108.jpeg"]
-    },
+    //                             {
+    //     id: 108,
+    //     name: "Apex من شركة الايتيث",
+    //     category: "devices",
+    //     price: "155 $",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect108.jpeg"]
+    // },
 
                                 {
         id: 109,
@@ -1090,7 +1090,7 @@ const products = [
         id: 113,
         name: "مجموعة كمبوزيت كاريزما",
         category: "materials",
-        price: "50 $",
+        price: "45 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect113.jpeg"]
@@ -1187,15 +1187,15 @@ const products = [
         images: ["./imgprodects/prodect123.jpeg"]
     },
 
-                            {
-        id: 124,
-        name: "باينات قلع",
-        category: "tools",
-        price: "22 $",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect124.jpeg"]
-    },
+    //                         {
+    //     id: 124,
+    //     name: "باينات قلع",
+    //     category: "tools",
+    //     price: "22 $",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect124.jpeg"]
+    // },
 
                             {
         id: 125,
@@ -1251,7 +1251,7 @@ const products = [
         id: 130,
         name: "غلاس ضوئي",
         category: "materials",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect130.jpeg"]
@@ -1297,15 +1297,15 @@ const products = [
         images: ["./imgprodects/prodect134.jpeg"]
     },
 
-                            {
-        id: 135,
-        name: "روتري 9 أنظمة",
-        category: "devices",
-        price: "78 $",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect135.jpeg"]
-    },
+    //                         {
+    //     id: 135,
+    //     name: "روتري 9 أنظمة",
+    //     category: "devices",
+    //     price: "78 $",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect135.jpeg"]
+    // },
 
                             {
         id: 136,
@@ -1319,7 +1319,7 @@ const products = [
 
                             {
         id: 138,
-        name: "كمبوزيت GC",
+        name: "كمبوزيت GC للاسنان الخلفية",
         category: "materials",
         price: "28 $",
         description: "",
@@ -1337,15 +1337,15 @@ const products = [
         images: ["./imgprodects/prodect139.jpeg"]
     },
 
-                                {
-        id:140 ,
-        name: "Apex من شركة وييد بيكر",
-        category: "devices",
-        price: "$",
-        description: "Apex من شركة وييد بيكر عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
-        features: [""],
-        images: ["./imgprodects/prodect140.jpeg"]
-    },
+    //                             {
+    //     id:140 ,
+    //     name: "Apex من شركة وييد بيكر",
+    //     category: "devices",
+    //     price: "$",
+    //     description: "Apex من شركة وييد بيكر عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect140.jpeg"]
+    // },
 
                                     {
         id:141 ,
@@ -1431,7 +1431,7 @@ const products = [
         id:215 ,
         name: "جلفوم",
         category: "materials",
-        price: "1.75 $",
+        price: "2.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect215.jpeg"]
@@ -1471,7 +1471,7 @@ const products = [
         id:219 ,
         name: "معقم ادوات",
         category: "materials",
-        price: "$",
+        price: "10 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect219.jpeg"]
@@ -1529,9 +1529,9 @@ const products = [
 
             {
         id:227 ,
-        name: "كمبوزيت سيال nova",
+        name: "كمبوزيت nova",
         category: "materials",
-        price: "11 $",
+        price: "5.5 $",
         description: "4 تيوب",
         features: [""],
         images: ["./imgprodects/prodect227.jpeg"]
@@ -1561,7 +1561,7 @@ const products = [
         id:230 ,
         name: "Cera seal Meta",
         category: "materials",
-        price: "58 $",
+        price: "50 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect230.jpeg"]
@@ -1571,7 +1571,7 @@ const products = [
         id:231 ,
         name: "Zeta plus مجموعة سيلكون",
         category: "materials",
-        price: "6 $",
+        price: "35 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect231.jpeg"]
@@ -1581,7 +1581,7 @@ const products = [
         id:232 ,
         name: "Zink phosphate",
         category: "materials",
-        price: "6 $",
+        price: "7.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect232.jpeg"]
@@ -1641,7 +1641,7 @@ const products = [
         id:238 ,
         name: "MTA RPPT _X PRO",
         category: "materials",
-        price: "15 $",
+        price: "10 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect238.jpeg"]
