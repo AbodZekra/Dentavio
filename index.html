@@ -2913,7 +2913,193 @@ body.cart-open::after {
         opacity: 0.6;
     }
 }
+/* ===== تحسينات مساحة السلة - تصميم مضغوط ===== */
+.cart-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+}
 
+/* الملخص السريع */
+.cart-quick-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.quick-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.quick-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* زر فتح/إغلاق الخيارات */
+.toggle-options-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.toggle-options-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary);
+}
+
+.toggle-options-btn i:first-child {
+    color: var(--primary);
+}
+
+.toggle-options-btn .fa-chevron-down {
+    transition: transform 0.3s ease;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.toggle-options-btn.open .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* منطقة الخيارات القابلة للطي */
+.order-options-collapsible {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: slideDown 0.3s ease;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.order-options-collapsible::-webkit-scrollbar {
+    width: 4px;
+}
+
+.order-options-collapsible::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.order-options-collapsible::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+/* خيار مضغوط */
+.cart-option-mini {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cart-option-mini .cart-option-header {
+    padding: 4px 0;
+    gap: 10px;
+}
+
+.cart-option-mini .cart-option-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+}
+
+.cart-option-mini .cart-option-icon i {
+    font-size: 16px;
+}
+
+.cart-option-mini .cart-option-title {
+    font-size: 14px;
+}
+
+.cart-option-mini .cart-option-desc {
+    font-size: 11px;
+}
+
+.cart-option-mini .cart-option-body {
+    padding: 0;
+    margin-top: 8px;
+}
+
+.cart-option-mini .cart-textarea,
+.cart-option-mini .cart-input {
+    padding: 10px 36px 10px 12px;
+    font-size: 13px;
+}
+
+.cart-option-mini .cart-radio-label {
+    padding: 8px 10px;
+    margin-bottom: 4px;
+}
+
+.cart-option-mini .radio-title {
+    font-size: 13px;
+}
+
+.cart-option-mini .radio-desc {
+    font-size: 10px;
+}
+
+.cart-option-mini .cart-option-inner {
+    margin-top: 6px;
+    padding: 10px;
+}
+
+/* زر الإرسال */
+.send-order-btn {
+    margin-top: 4px;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 480px) {
+    .cart-options-container {
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .cart-quick-summary {
+        padding: 8px 12px;
+    }
+    
+    .quick-value {
+        font-size: 18px;
+    }
+    
+    .toggle-options-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .order-options-collapsible {
+        max-height: 280px;
+    }
+    
+    .cart-option-mini {
+        padding: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -3459,109 +3645,117 @@ document.querySelectorAll('.cart-item-remove').forEach(btn => {
     
     // عرض الإجمالي وخيارات التوصيل والدفع
     if (cartFooter) {
-        cartFooter.innerHTML = `
-            <div class="cart-options">
-    <!-- خيار التوصيل -->
-    <div class="cart-option">
-        <div class="cart-option-header" id="cartDeliveryToggle">
-            <div class="cart-option-icon">
-                <i class="fas fa-truck"></i>
+    cartFooter.innerHTML = `
+        <div class="cart-options-container">
+            <!-- المجموع السريع -->
+            <div class="cart-quick-summary">
+                <span class="quick-label">الإجمالي</span>
+                <span class="quick-value">${total.toLocaleString('en-US')} $</span>
             </div>
-            <div class="cart-option-info">
-                <span class="cart-option-title">خدمة التوصيل</span>
-                <span class="cart-option-desc">أضف عنوان التوصيل أو شارك موقعك</span>
-            </div>
-            <div class="cart-option-switch">
-                <label class="toggle-switch">
-                    <input type="checkbox" id="cartDeliveryCheckbox" ${cartDelivery.enabled ? 'checked' : ''}>
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
-        </div>
-        <div class="cart-option-body" id="cartDeliveryContent" style="display: ${cartDelivery.enabled ? 'block' : 'none'};">
-            <div class="input-wrapper">
-                <i class="fas fa-map-marker-alt input-icon"></i>
-                <textarea id="cartDeliveryLocation" 
-                    class="cart-textarea" 
-                    placeholder="أدخل عنوان التوصيل بالتفصيل..."
-                    rows="2">${cartDelivery.location || ''}</textarea>
-            </div>
-            <button type="button" class="cart-action-btn" id="cartShareLocationBtn">
-                <i class="fas fa-location-dot"></i>
-                <span>مشاركة موقعي الحالي</span>
+
+            <!-- زر فتح/إغلاق خيارات الطلب -->
+            <button type="button" class="toggle-options-btn" id="toggleOrderOptions">
+                <i class="fas fa-sliders-h"></i>
+                <span>خيارات الطلب</span>
+                <i class="fas fa-chevron-down" id="optionsArrow"></i>
             </button>
-        </div>
-    </div>
-    
-    <!-- فاصل -->
-    <div class="cart-divider"></div>
-    
-    <!-- خيار الدفع -->
-    <div class="cart-option">
-        <div class="cart-option-header" style="cursor: default;">
-            <div class="cart-option-icon">
-                <i class="fas fa-credit-card"></i>
-            </div>
-            <div class="cart-option-info">
-                <span class="cart-option-title">طريقة الدفع</span>
-            </div>
-        </div>
-        <div class="cart-option-body" style="padding-top: 8px;">
-<!-- راديو 1: الدفع عند الاستلام -->
-<label class="cart-radio-label" for="cartPayOnDelivery">
-    <input type="radio" id="cartPayOnDelivery" name="cartPaymentMethod" value="on_delivery" ${!cartPayment.enabled ? 'checked' : ''}>
-    <span class="radio-custom"></span>
-    <div class="radio-content">
-        <span class="radio-title">الدفع عند الاستلام</span>
-        <span class="radio-desc">ادفع ثمن المنتجات عند استلامها</span>
-    </div>
-</label>
 
-<!-- راديو 2: الدفع قبل الاستلام (شام كاش) -->
-<label class="cart-radio-label" for="cartPayBeforeDelivery">
-    <input type="radio" id="cartPayBeforeDelivery" name="cartPaymentMethod" value="before_delivery" ${cartPayment.enabled ? 'checked' : ''}>
-    <span class="radio-custom"></span>
-    <div class="radio-content">
-        <span class="radio-title">الدفع قبل الاستلام</span>
-        <span class="radio-desc">شام كاش</span>
-    </div>
-</label>
-            
-            <!-- محتوى شام كاش -->
-            <div class="cart-option-inner" id="cartPaymentContent" style="display: ${cartPayment.enabled ? 'block' : 'none'};">
-                <div class="input-wrapper">
-                    <i class="fas fa-user input-icon"></i>
-                    <input type="text" 
-                        id="cartPaymentName" 
-                        class="cart-input" 
-                        placeholder="الاسم المسجل في شام كاش"
-                        value="${cartPayment.name || ''}">
-                </div>
-                <div class="payment-details">
-                    <div class="payment-code-header">
-                        <i class="fas fa-copy"></i>
-                        <span>معلومات التحويل</span>
-                    </div>
-                    <code class="payment-code">yrturhtrjhgjfkdghkjfdyueryt</code>
-                    <button type="button" class="cart-action-btn" id="cartCopyPaymentBtn">
-                        <i class="fas fa-copy"></i>
-                        <span>نسخ معلومات الدفع</span>
-                    </button>
-                </div>
-            </div>
-
-                            <!-- فاصل -->
-                <div class="cart-divider"></div>
+            <!-- منطقة الخيارات القابلة للطي -->
+            <div class="order-options-collapsible" id="orderOptionsCollapsible" style="display: none;">
                 
-                <!-- حقل الملاحظات -->
-                <div class="cart-option">
+                <!-- خيار التوصيل -->
+                <div class="cart-option-mini">
+                    <div class="cart-option-header" id="cartDeliveryToggle">
+                        <div class="cart-option-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="cart-option-info">
+                            <span class="cart-option-title">خدمة التوصيل</span>
+                            <span class="cart-option-desc">أضف عنوان التوصيل أو شارك موقعك</span>
+                        </div>
+                        <div class="cart-option-switch">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="cartDeliveryCheckbox" ${cartDelivery.enabled ? 'checked' : ''}>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="cart-option-body" id="cartDeliveryContent" style="display: ${cartDelivery.enabled ? 'block' : 'none'};">
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt input-icon"></i>
+                            <textarea id="cartDeliveryLocation" 
+                                class="cart-textarea" 
+                                placeholder="أدخل عنوان التوصيل بالتفصيل..."
+                                rows="2">${cartDelivery.location || ''}</textarea>
+                        </div>
+                        <button type="button" class="cart-action-btn" id="cartShareLocationBtn">
+                            <i class="fas fa-location-dot"></i>
+                            <span>مشاركة موقعي الحالي</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- خيار الدفع -->
+                <div class="cart-option-mini">
+                    <div class="cart-option-header" style="cursor: default;">
+                        <div class="cart-option-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="cart-option-info">
+                            <span class="cart-option-title">طريقة الدفع</span>
+                        </div>
+                    </div>
+                    <div class="cart-option-body" style="padding-top: 8px;">
+                        <label class="cart-radio-label">
+                            <input type="radio" name="cartPaymentMethod" value="on_delivery" ${!cartPayment.enabled ? 'checked' : ''}>
+                            <span class="radio-custom"></span>
+                            <div class="radio-content">
+                                <span class="radio-title">الدفع عند الاستلام</span>
+                                <span class="radio-desc">ادفع ثمن المنتجات عند استلامها</span>
+                            </div>
+                        </label>
+                        
+                        <label class="cart-radio-label">
+                            <input type="radio" name="cartPaymentMethod" value="before_delivery" ${cartPayment.enabled ? 'checked' : ''}>
+                            <span class="radio-custom"></span>
+                            <div class="radio-content">
+                                <span class="radio-title">الدفع قبل الاستلام</span>
+                                <span class="radio-desc">شام كاش</span>
+                            </div>
+                        </label>
+                        
+                        <div class="cart-option-inner" id="cartPaymentContent" style="display: ${cartPayment.enabled ? 'block' : 'none'};">
+                            <div class="input-wrapper">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" 
+                                    id="cartPaymentName" 
+                                    class="cart-input" 
+                                    placeholder="الاسم المسجل في شام كاش"
+                                    value="${cartPayment.name || ''}">
+                            </div>
+                            <div class="payment-details">
+                                <div class="payment-code-header">
+                                    <i class="fas fa-copy"></i>
+                                    <span>معلومات التحويل</span>
+                                </div>
+                                <code class="payment-code">yrturhtrjhgjfkdghkjfdyueryt</code>
+                                <button type="button" class="cart-action-btn" id="cartCopyPaymentBtn">
+                                    <i class="fas fa-copy"></i>
+                                    <span>نسخ معلومات الدفع</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- حقل الملاحظات المضغوط -->
+                <div class="cart-option-mini">
                     <div class="cart-option-header" style="cursor: default;">
                         <div class="cart-option-icon">
                             <i class="fas fa-sticky-note"></i>
                         </div>
                         <div class="cart-option-info">
                             <span class="cart-option-title">ملاحظات إضافية</span>
-                            <span class="cart-option-desc">أي تفاصيل تريد إضافتها لطلبك</span>
                         </div>
                     </div>
                     <div class="cart-option-body" style="padding-top: 8px;">
@@ -3570,30 +3764,20 @@ document.querySelectorAll('.cart-item-remove').forEach(btn => {
                             <textarea id="cartNotes" 
                                 class="cart-textarea" 
                                 placeholder="أكتب أي ملاحظات تريد إضافتها لطلبك..."
-                                rows="3">${cartNotes || ''}</textarea>
+                                rows="2">${cartNotes || ''}</textarea>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- زر الإرسال النهائي -->
+            <button class="send-order-btn" id="sendCartOrderBtn">
+                <i class="fab fa-telegram"></i>
+                <span>إرسال طلب الشراء</span>
+            </button>
         </div>
-    </div>
-</div>
+    `;
 
-<div class="cart-total-section">
-    <span class="cart-total-label">الإجمالي</span>
-    <span class="cart-total-value">${total.toLocaleString('en-US')} $</span>
-</div>
-
-<button class="send-order-btn" id="sendCartOrderBtn">
-    <i class="fab fa-telegram"></i>
-    <span>إرسال طلب الشراء</span>
-</button>
-
-`;
-
-// ... rest of code stays the same
-        
-        // ربط أحداث خيارات التوصيل والدفع
 // ربط أحداث خيارات التوصيل والدفع
 const deliveryCheckbox = document.getElementById('cartDeliveryCheckbox');
 const deliveryContent = document.getElementById('cartDeliveryContent');
@@ -3615,6 +3799,38 @@ if (deliveryCheckbox && deliveryContent) {
             }
         }
         saveCart();
+    });
+}
+
+
+// بعد كود ربط الأحداث الموجود في updateCartUI()، أضف:
+
+// زر فتح/إغلاق خيارات الطلب
+const toggleOptionsBtn = document.getElementById('toggleOrderOptions');
+const orderOptionsCollapsible = document.getElementById('orderOptionsCollapsible');
+const optionsArrow = document.getElementById('optionsArrow');
+
+if (toggleOptionsBtn && orderOptionsCollapsible) {
+    // حفظ حالة الفتح/الإغلاق
+    let isOptionsOpen = localStorage.getItem('dentavio_cart_options_open') === 'true';
+    
+    if (isOptionsOpen) {
+        orderOptionsCollapsible.style.display = 'flex';
+        toggleOptionsBtn.classList.add('open');
+    }
+    
+    toggleOptionsBtn.addEventListener('click', () => {
+        const isOpen = orderOptionsCollapsible.style.display !== 'none';
+        
+        if (isOpen) {
+            orderOptionsCollapsible.style.display = 'none';
+            toggleOptionsBtn.classList.remove('open');
+            localStorage.setItem('dentavio_cart_options_open', 'false');
+        } else {
+            orderOptionsCollapsible.style.display = 'flex';
+            toggleOptionsBtn.classList.add('open');
+            localStorage.setItem('dentavio_cart_options_open', 'true');
+        }
     });
 }
 const cartPaymentRadios = document.querySelectorAll('input[name="cartPaymentMethod"]');
