@@ -109,28 +109,28 @@ const products = [
             "./imgprodects/prodect10.jpeg"
         ]
     },
-        {
-        id: 11,
-        name: "فرد حاقن للإكريل الفموي",
-        category: "tools",
-        price: "$",
-        description: "فرد حاقن عالي الجودة مصمم لتطبيق الإكريل الفموي بدقة وسهولة. يوفر توزيعًا متساويًا للمواد لضمان نتائج ممتازة في عمليات الترميم والتجميل.",
-        features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
-        images: [
-            "./imgprodects/prodect11.jpeg"
-        ]
-    },
-            {
-        id: 12,
-        name: "قاطع كوتا معدنية",
-        category: "tools",
-        price: " $",
-        description: "قاطع كوتا معدنية عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
-        features: ["تصميم معدني قوي ومتين", "مصنوع من مواد عالية الجودة مقاومة للتآكل", "سهل التركيب "],
-        images: [
-            "./imgprodects/prodect12.jpeg"
-        ]
-    },
+    //     {
+    //     id: 11,
+    //     name: "فرد حاقن للإكريل الفموي",
+    //     category: "tools",
+    //     price: "$",
+    //     description: "فرد حاقن عالي الجودة مصمم لتطبيق الإكريل الفموي بدقة وسهولة. يوفر توزيعًا متساويًا للمواد لضمان نتائج ممتازة في عمليات الترميم والتجميل.",
+    //     features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
+    //     images: [
+    //         "./imgprodects/prodect11.jpeg"
+    //     ]
+    // },
+    //         {
+    //     id: 12,
+    //     name: "قاطع كوتا معدنية",
+    //     category: "tools",
+    //     price: " $",
+    //     description: "قاطع كوتا معدنية عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
+    //     features: ["تصميم معدني قوي ومتين", "مصنوع من مواد عالية الجودة مقاومة للتآكل", "سهل التركيب "],
+    //     images: [
+    //         "./imgprodects/prodect12.jpeg"
+    //     ]
+    // },
         {
         id: 13,
         name: "مرايا أسنان",
@@ -142,17 +142,17 @@ const products = [
             "./imgprodects/prodect13.jpeg"
         ]
     },
-            {
-        id: 14,
-        name: "أمثلة تدربية للكمبوزيت",
-        category: "materials",
-        price: "$",
-        description: "امثلة تدربية للكمبوزيت عالية الجودة مصممة لتوفير تجربة تعليمية فعالة في مجال طب الأسنان.",
-        features: ["مناسب للطلاب و الشروحات , تحاكي الحالات السريرية الحقيقية"],
-        images: [
-            "./imgprodects/prodect14.jpeg"
-        ]
-    },
+    //         {
+    //     id: 14,
+    //     name: "أمثلة تدربية للكمبوزيت",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "امثلة تدربية للكمبوزيت عالية الجودة مصممة لتوفير تجربة تعليمية فعالة في مجال طب الأسنان.",
+    //     features: ["مناسب للطلاب و الشروحات , تحاكي الحالات السريرية الحقيقية"],
+    //     images: [
+    //         "./imgprodects/prodect14.jpeg"
+    //     ]
+    // },
             {
         id: 15,
         name: "أوتاد معدنية",
@@ -163,21 +163,21 @@ const products = [
         images: ["./imgprodects/prodect15.jpeg"]
     },
 
-                {
-        id: 16,
-        name: "مشابك  Garrison",
-        category: "materials",
-        price: " $",
-        description: "مشابك حاجز مطاطي عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
-        features: ["تصميم مطاطي قوي ومتين", "مصنوع من مواد عالية الجودة مقاومة للتآكل", "متين و مريح"],
-        images: ["./imgprodects/prodect16.jpeg"]
-    },
+    //             {
+    //     id: 16,
+    //     name: "مشابك  Garrison",
+    //     category: "materials",
+    //     price: " $",
+    //     description: "مشابك حاجز مطاطي عالي الجودة مصمم للاستخدام في العيادات السنية. يوفر أداءً ممتازًا في عمليات الترميم السنية.",
+    //     features: ["تصميم مطاطي قوي ومتين", "مصنوع من مواد عالية الجودة مقاومة للتآكل", "متين و مريح"],
+    //     images: ["./imgprodects/prodect16.jpeg"]
+    // },
 
         {
         id: 17,
         name: "تلميع وانهاء كمبوزيت",
         category: "materials",
-        price: "$",
+        price: "10 $",
         description: "تلميع وانهاء كمبوزيت عالي الجودة مصمم لتوفير نتائج تلميع ممتازة في عمليات الترميم والتجميل السنية.",
         features: ["انيقة و عملية"],
         images: ["./imgprodects/prodect17.jpeg"]
@@ -295,7 +295,7 @@ const products = [
         id: 28,
         name: "طقم نحت صابون",
         category: "tools",
-        price: "$",
+        price: "8 $",
         description: "طقم نحت صابون عالي الجودة مصمم للاستخدامات الطلابية",
         features: ["تصميم مريح وسهل الاستخدام", "متين وعملي"],
         images: ["./imgprodects/prodect28.jpeg"]
@@ -341,15 +341,15 @@ const products = [
         images: ["./imgprodects/prodect32.jpeg"]
     },
 
-                    {
-        id: 33,
-        name: "كمبوزيت Tokuuyama",
-        category: "materials",
-        price: "$",
-        description: "كمبوزيت Tokuuyama عالي الجودة مصمم للاستخدام في العيادات السنية.",
-        features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
-        images: ["./imgprodects/prodect33.jpeg"]
-    },
+    //                 {
+    //     id: 33,
+    //     name: "كمبوزيت Tokuuyama",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "كمبوزيت Tokuuyama عالي الجودة مصمم للاستخدام في العيادات السنية.",
+    //     features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
+    //     images: ["./imgprodects/prodect33.jpeg"]
+    // },
 
                     {
         id: 34,
@@ -437,7 +437,7 @@ const products = [
         id: 42,
         name: "كيت انهاء وتلميع كمبوزيت",
         category: "materials",
-        price: "$",
+        price: "5 $",
         description: "كيت انهاء وتلميع كمبوزيت عالي الجودة مصمم لتوفير نتائج تلميع ممتازة في عمليات الترميم والتجميل السنية.",
         features: ["اشكال عديدة لتلبية الإحتياجات", "عملي و فعال"],
         images: ["./imgprodects/prodect42.jpeg"]
@@ -467,21 +467,21 @@ const products = [
         id: 45,
         name: "فواتح فم بلاستيك",
         category: "materials",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect45.jpeg"]
     },
     
-                        {
-        id: 46,
-        name: "حامل سينسور",
-        category: "tools",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect46.jpeg"]
-    },
+    //                     {
+    //     id: 46,
+    //     name: "حامل سينسور",
+    //     category: "tools",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect46.jpeg"]
+    // },
     
                             {
         id: 47,
@@ -497,7 +497,7 @@ const products = [
         id: 48,
         name: "حامل سنابل بلاستيك طلابي",
         category: "tools",
-        price: "$",
+        price: "2.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect48.jpeg"]
@@ -694,15 +694,15 @@ const products = [
         images: ["./imgprodects/prodect67.jpeg"]
     },
 
-                                {
-        id: 68,
-        name: "الواح بلاستيك حافظة للبوند",
-        category: "tools",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect68.jpeg"]
-    },
+    //                             {
+    //     id: 68,
+    //     name: "الواح بلاستيك حافظة للبوند",
+    //     category: "tools",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect68.jpeg"]
+    // },
 
                                 {
         id: 69,
@@ -757,9 +757,9 @@ const products = [
 
                                 {
         id: 74,
-        name: "اللوبس الرأسي مع بطارية اضافية تكبير 3.5×",
+        name: "اللوبس الرأسي مع بطارية اضافية تكبير 5×",
         category: "",
-        price: "$",
+        price: "85 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect74.jpeg"]
@@ -799,21 +799,21 @@ const products = [
         id: 77,
         name: "قبضة كفترون",
         category: "devices",
-        price: "$",
+        price: "34 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect77.jpeg"]
     },
 
-                                {
-        id: 78,
-        name: " كاميرا Hyper light   وسينسور eighteeth",
-        category: "devices",
-        price: "$",
-        description: "كاميرا Hyper light   وسينسور eighteeth عالي الجودة مصمم للاستخدام في العيادات السنية. مع كفالة كاملة لمدة 6 اشهر",
-        features: [""],
-        images: ["./imgprodects/prodect78.jpeg", "./imgprodects/prodect79.jpeg", "./imgprodects/prodect80.jpeg"]
-    },
+    //                             {
+    //     id: 78,
+    //     name: " كاميرا Hyper light   وسينسور eighteeth",
+    //     category: "devices",
+    //     price: "$",
+    //     description: "كاميرا Hyper light   وسينسور eighteeth عالي الجودة مصمم للاستخدام في العيادات السنية. مع كفالة كاملة لمدة 6 اشهر",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect78.jpeg", "./imgprodects/prodect79.jpeg", "./imgprodects/prodect80.jpeg"]
+    // },
 
                                 {
         id: 81,
@@ -960,7 +960,7 @@ const products = [
         id: 99,
         name: "فواتح فم",
         category: "tools",
-        price: "$",
+        price: "3 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect99.jpeg"]
@@ -986,15 +986,15 @@ const products = [
         images: ["./imgprodects/prodect101.jpeg","./imgprodects/prodect102.jpeg"]
     },
 
-                                {
-        id: 103,
-        name: "جهاز تسخين الكمبوزيت وسوائل الارواء",
-        category: "devices",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect103.jpeg"]
-    },
+    //                             {
+    //     id: 103,
+    //     name: "جهاز تسخين الكمبوزيت وسوائل الارواء",
+    //     category: "devices",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect103.jpeg"]
+    // },
 
                                 {
         id: 104,
@@ -1026,15 +1026,15 @@ const products = [
         images: ["./imgprodects/prodect106.jpeg"]
     },
 
-                                {
-        id: 107,
-        name: "بيوسيراميك angelus البرازيلي",
-        category: "materials",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect107.jpeg"]
-    },
+    //                             {
+    //     id: 107,
+    //     name: "بيوسيراميك angelus البرازيلي",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect107.jpeg"]
+    // },
 
     //                             {
     //     id: 108,
@@ -1056,15 +1056,15 @@ const products = [
         images: ["./imgprodects/prodect109.jpeg"]
     },
 
-                                {
-        id: 110,
-        name:" جهاز مزيل غباش لمرايا التصوير",
-        category: "devices",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect110.jpeg"]
-    },
+    //                             {
+    //     id: 110,
+    //     name:" جهاز مزيل غباش لمرايا التصوير",
+    //     category: "devices",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect110.jpeg"]
+    // },
 
                                 {
         id: 111,
@@ -1207,25 +1207,25 @@ const products = [
         images: ["./imgprodects/prodect125.jpeg"]
     },
 
-                            {
-        id: 126,
-        name: "غطاء محقنة التخدير",
-        category: "materials",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect126.jpeg"]
-    },
+    //                         {
+    //     id: 126,
+    //     name: "غطاء محقنة التخدير",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect126.jpeg"]
+    // },
 
-                            {
-        id: 127,
-        name: "امبولات كمبوزيت everx",
-        category: "materials",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect127.jpeg"]
-    },
+    //                         {
+    //     id: 127,
+    //     name: "امبولات كمبوزيت everx",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect127.jpeg"]
+    // },
 
                             {
         id: 128,
@@ -1267,25 +1267,25 @@ const products = [
         images: ["./imgprodects/prodect131.jpeg"]
     },
 
-                            {
-        id: 132,
-        name: "بوند GC من شركة ever x",
-        category: "materials",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect132.jpeg"]
-    },
+    //                         {
+    //     id: 132,
+    //     name: "بوند GC من شركة ever x",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect132.jpeg"]
+    // },
 
-                            {
-        id: 133,
-        name: "مرايا MEGA",
-        category: "tools",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect133.jpeg"]
-    },
+    //                         {
+    //     id: 133,
+    //     name: "مرايا MEGA",
+    //     category: "tools",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect133.jpeg"]
+    // },
 
                             {
         id: 134,
@@ -1337,21 +1337,21 @@ const products = [
         images: ["./imgprodects/prodect139.jpeg"]
     },
 
-    //                             {
-    //     id:140 ,
-    //     name: "Apex من شركة وييد بيكر",
-    //     category: "devices",
-    //     price: "$",
-    //     description: "Apex من شركة وييد بيكر عالي الجودة , مزود بجميع الملحقات , مع كفالة كاملة لمدة سنة",
-    //     features: [""],
-    //     images: ["./imgprodects/prodect140.jpeg"]
-    // },
+                                    {
+        id:140 ,
+        name: "قبضات توربين being ضوئية",
+        category: "tools",
+        price: "65 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect141.jpeg"]
+    },
 
                                     {
         id:141 ,
-        name: "قبضلت توربين being",
+        name: "قبضات توربين being غير ضوئية",
         category: "tools",
-        price: "$",
+        price: "35 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect141.jpeg"]
@@ -1367,15 +1367,15 @@ const products = [
         images: ["./imgprodects/prodect142.jpeg"]
     },
 
-                                    {
-        id:143 ,
-        name: "محاقن تخدير الكترونية",
-        category: "devices",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect143.jpeg"]
-    },
+    //                                 {
+    //     id:143 ,
+    //     name: "محاقن تخدير الكترونية",
+    //     category: "devices",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect143.jpeg"]
+    // },
 
                                     {
         id:144 ,
@@ -1397,31 +1397,31 @@ const products = [
         images: ["./imgprodects/prodect145.jpeg"]
     },
 
-                                    {
-        id:146 ,
-        name: "قبضة مكرتور",
-        category: "tools",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect146.jpeg"]
-    },
+    //                                 {
+    //     id:146 ,
+    //     name: "قبضة مكرتور",
+    //     category: "tools",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect146.jpeg"]
+    // },
 
-                                    {
-        id:147 ,
-        name: "بوليش أسنان",
-        category: "materials",
-        price: "$",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect147.jpeg"]
-    },
+    //                                 {
+    //     id:147 ,
+    //     name: "بوليش أسنان",
+    //     category: "materials",
+    //     price: "$",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect147.jpeg"]
+    // },
 
                                     {
         id:148 ,
         name: "شمع حواف",
         category: "materials",
-        price: "$",
+        price: "2.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect148.jpeg"]
@@ -1684,9 +1684,188 @@ const products = [
         price: "3300 $",
         description: "ماركه suntem موديل ST-D302",
         features: ["كافترون ضوئي داخلي","جهاز تصليب ضوئي داخلي"],
-        images: ["./imgprodects/prodect245.jpeg"]
+        images: ["./imgprodects/image.jpeg"]
     },
 
+                    {
+        id:246 ,
+        name: "الجينات Hygedent",
+        category: "materials",
+        price: "4.5 $",
+        description: "",
+        features: [""],
+        images: ["./imgprodects/prodect245.jpeg","./imgprodects/prodect246.jpeg"]
+    },
+
+                    {
+        id:247 ,
+        name: "مجموعة كمبوزيت Te_Econom plus من شركة ivoclar",
+        category: "materials",
+        price: "90 $",
+        description: "8 تيوبات كمبوزيت 2 مخرش بوند",
+        features: [],
+        images: ["./imgprodects/prodect247.jpeg"]
+    },
+
+                        {
+        id:248 ,
+        name: "شفرات جراحية",
+        category: "materials",
+        price: "5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect248.jpeg"]
+    },
+
+                        {
+        id:249 ,
+        name: "مخدر الليدوكائين كولمبي",
+        category: "materials",
+        price: "15 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect249.jpeg"]
+    },
+
+                        {
+        id:250 ,
+        name: "مجموعة قبضات cicada ",
+        category: "devices",
+        price: "60 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect250.jpeg"]
+    },
+
+                        {
+        id:251 ,
+        name: "مخرش",
+        category: "materials",
+        price: "7.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect251.jpeg"]
+    },
+
+                        {
+        id:252 ,
+        name: "اكريل فموي",
+        category: "materials",
+        price: "32 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect252.jpeg"]
+    },
+
+                        {
+        id:253 ,
+        name: "Rubber dam kit",
+        category: "materials",
+        price: "27 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect253.jpeg"]
+    },
+
+            {
+        id:254 ,
+        name: "مجموعة كمبوزيت meri dian",
+        category: "materials",
+        price: "27 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect254.jpeg"]
+    },
+
+                            {
+        id:256 ,
+        name: "كمبوزيت llis",
+        category: "materials",
+        price: "3.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect256.jpeg"]
+    },
+
+                            {
+        id:258 ,
+        name: "كمبوزيت crown fill",
+        category: "materials",
+        price: "2.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect258.jpeg"]
+    },
+
+                            {
+        id:259 ,
+        name: "Charisma كمبوزيت",
+        category: "materials",
+        price: "10 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect259.jpeg"]
+    },
+
+                            {
+        id:260 ,
+        name: "Escom كمبوزيت",
+        category: "materials",
+        price: "7.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect260.jpeg"]
+    },
+
+                                {
+        id:261 ,
+        name: "كمبوزيت صيني",
+        category: "materials",
+        price: "4.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect261.jpeg"]
+    },
+
+                                {
+        id:262 ,
+        name: "كمبوزيت ivoclar",
+        category: "materials",
+        price: "25 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect262.jpeg"]
+    },
+
+                                {
+        id:263 ,
+        name: "كمبوزيت nova",
+        category: "materials",
+        price: "5.5 $",
+        description: "",
+        features: [],
+        images: ["./imgprodects/prodect263.jpeg"]
+    },
+
+                                {
+        id:264 ,
+        name: "HERCULITE كمبوزيت",
+        category: "materials",
+        price: "7.5 $",
+        description: "السعر للتيوب الواحد",
+        features: [],
+        images: ["./imgprodects/prodect265.jpeg"]
+    },
+
+                                {
+        id:265 ,
+        name: "Meri dian كمبوزيت",
+        category: "materials",
+        price: "5.5 $",
+        description: "السعر للتيوب الواحد",
+        features: [],
+        images: ["./imgprodects/prodect265.jpeg"]
+    },
 
 ];
 
