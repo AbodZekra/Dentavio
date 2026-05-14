@@ -109,17 +109,17 @@ const products = [
             "./imgprodects/prodect10.jpeg"
         ]
     },
-    //     {
-    //     id: 11,
-    //     name: "فرد حاقن للإكريل الفموي",
-    //     category: "tools",
-    //     price: "$",
-    //     description: "فرد حاقن عالي الجودة مصمم لتطبيق الإكريل الفموي بدقة وسهولة. يوفر توزيعًا متساويًا للمواد لضمان نتائج ممتازة في عمليات الترميم والتجميل.",
-    //     features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
-    //     images: [
-    //         "./imgprodects/prodect11.jpeg"
-    //     ]
-    // },
+        {
+        id: 11,
+        name: "فرد حاقن للإكريل الفموي",
+        category: "tools",
+        price: "8 $",
+        description: "فرد حاقن عالي الجودة مصمم لتطبيق الإكريل الفموي بدقة وسهولة. يوفر توزيعًا متساويًا للمواد لضمان نتائج ممتازة في عمليات الترميم والتجميل.",
+        features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
+        images: [
+            "./imgprodects/prodect11.jpeg"
+        ]
+    },
     //         {
     //     id: 12,
     //     name: "قاطع كوتا معدنية",
@@ -157,7 +157,7 @@ const products = [
         id: 15,
         name: "أوتاد معدنية",
         category: "tools",
-        price: "4.5$",
+        price: "13 $",
         description: "أوتاد معدنية عالية الجودة مصممة للاستخدام في العيادات السنية تتميز بتصميمها العملي ومتانة جيدة.",
         features: ["تصميم معدني قوي ومتين", "مصنوعة من مواد عالية الجودة مقاومة للتآكل", "سهل التركيب والتبديل"],
         images: ["./imgprodects/prodect15.jpeg"]
@@ -303,9 +303,9 @@ const products = [
 
                     {
         id: 29,
-        name: "دليل الألوان vita",
+        name: "دليل الألوان vita كلاسيكي ",
         category: "",
-        price: "30 $",
+        price: "13 $",
         description: "دليل الألوان vita عالي الجودة مصمم للاستخدامات الطلابية",
         features: ["مواد ممتازة للحفاظ على الألوان على المدى الطويل"],
         images: ["./imgprodects/prodect29.jpeg"]
@@ -315,7 +315,7 @@ const products = [
         id: 30,
         name: "زيت قبضة",
         category: "materials",
-        price: "5 $",
+        price: "5.5 $",
         description: "علبة زيت ميكانيكي يدوية للحفاظ على أدواتك في حالة ممتازة. هذا الزيت عالي الجودة مصمم لتقليل الاحتكاك ومنع الصدأ، مما يطيل عمر أدواتك ويضمن أدائها الأمثل في كل استخدام.",
         features: ["الحفاظ على أدواتك في حالة ممتازة", "تقليل الاحتكاك ومنع الصدأ", "تطيل عمر أدواتك وتضمن أدائها الأمثل"],
         images: ["./imgprodects/prodect30.jpeg"]
@@ -335,7 +335,7 @@ const products = [
         id: 32,
         name: "تبيض ليزري أمريكي",
         category: "materials",
-        price: "25 $",
+        price: "28 $",
         description: "تبيض ليزري أمريكي عالي الجودة مصمم للاستخدام في العيادات السنية.",
         features: ["تصميم مريح وسهل الاستخدام", "مصنوع من مواد عالية الجودة"],
         images: ["./imgprodects/prodect32.jpeg"]
@@ -487,7 +487,7 @@ const products = [
         id: 47,
         name: "شرائط سحل كمبوزيت",
         category: "materials",
-        price: "5 $",
+        price: "5.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect47.jpeg"]
@@ -517,7 +517,7 @@ const products = [
         id: 50,
         name: "اقراص انهاء كمبوزيت",
         category: "materials",
-        price: "5 $",
+        price: "5.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect50.jpeg"]
@@ -537,7 +537,7 @@ const products = [
         id: 52,
         name: "أغطية حماية وعقامة لكرسي الأسنان",
         category: "materials",
-        price: "1.5 $",
+        price: "2 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect52.jpeg"]
@@ -577,7 +577,7 @@ const products = [
         id: 56,
         name: "أكياس تغليف للسينسور",
         category: "materials",
-        price: "5 $",
+        price: "6.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect56.jpeg"]
@@ -618,7 +618,7 @@ const products = [
         id: 60,
         name: "K_file",
         category: "materials",
-        price: "1.75 $",
+        price: "3.5 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect60.jpeg"]
@@ -849,9 +849,9 @@ const products = [
         id: 84,
         name: "أجهزة أشعة من شركة وييد بيكر",
         category: "devices",
-        price: "1650 $",
-        description: "أجهزة أشعة من شركة وييد بيكر كاميرا AiRi_x أحدث إصدار  كفالة لمدة عام كامل + سينسور مقاس 1.5 كفالة لمدة عامين 2",
-        features: [""],
+        price: "1600 $",
+        description: "أجهزة أشعة من شركة وييد بيكر كاميرا AiRi_x أحدث إصدار   + سينسور مقاس 1.5  2",
+        features: ["سينسور 1.5 كفالة عامين ","الكاميرا AiRi_x  كفالة عام"],
         images: ["./imgprodects/prodect84.jpeg","./imgprodects/prodect85.jpeg","./imgprodects/prodect86.jpeg"]
     },
 
@@ -1080,7 +1080,7 @@ const products = [
         id: 112,
         name: "تويين فلاش",
         category: "devices",
-        price: "48 $",
+        price: "55 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect112.jpeg"]
@@ -1391,7 +1391,7 @@ const products = [
         id:145 ,
         name: "تبيض أسنان أمريكي",
         category: "materials",
-        price: "25 $",
+        price: "28 $",
         description: "",
         features: [""],
         images: ["./imgprodects/prodect145.jpeg"]
@@ -1431,8 +1431,8 @@ const products = [
         id:215 ,
         name: "جلفوم",
         category: "materials",
-        price: "2.5 $",
-        description: "",
+        price: "3 $",
+        description: "قطع كبيرة",
         features: [""],
         images: ["./imgprodects/prodect215.jpeg"]
     },
@@ -1854,7 +1854,7 @@ const products = [
         price: "7.5 $",
         description: "السعر للتيوب الواحد",
         features: [],
-        images: ["./imgprodects/prodect265.jpeg"]
+        images: ["./imgprodects/prodect264.jpeg"]
     },
 
                                 {
@@ -1868,9 +1868,6 @@ const products = [
     },
 
 ];
-
-
-
 
 //// خشبيات العيادة الصور من 149 ل 214
 for (let id = 149; id <= 214; id++) {
