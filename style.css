@@ -3557,3 +3557,219 @@ body.cart-open::after {
         align-items: center;
     }
 }
+
+/* ========== زر تثبيت التطبيق ========== */
+.install-app-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: calc(100% - 48px);
+    margin: 36px 24px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    font-family: 'Tajawal', sans-serif;
+}
+
+.install-app-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.install-app-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.install-app-btn:hover::before {
+    left: 100%;
+}
+
+.install-app-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.install-app-btn i {
+    font-size: 18px;
+    animation: downloadPulse 2s infinite;
+}
+
+@keyframes downloadPulse {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* تأثير نبض للزر */
+@keyframes installPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.install-app-btn {
+    animation: installPulse 2s infinite;
+}
+
+/* ========== مودال دليل التثبيت ========== */
+.install-guide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.install-guide-content {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+    position: relative;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.guide-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.guide-close-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.guide-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.guide-icon i {
+    font-size: 30px;
+    color: var(--primary);
+    animation: downloadPulse 2s infinite;
+}
+
+.guide-text {
+    color: var(--text);
+    line-height: 2;
+    margin-bottom: 25px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.guide-text strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.guide-ok-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* تعديل للشاشات الصغيرة */
+@media (max-width: 480px) {
+    .install-app-btn {
+        margin: 12px 16px;
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+    
+    .install-guide-content {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+}
+
+/* إخفاء الزر عند عدم الحاجة */
+.install-app-btn.hidden {
+    display: none !important;
+}
+
+/* تأثير إضافي للزر عند التمرير */
+.install-app-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}

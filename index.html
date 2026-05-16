@@ -2717,6 +2717,240 @@ async function downloadInvoiceAsImage() {
         }
     });
     init();
+
+    // ========== كشف حالة التثبيت وزر التثبيت المباشر ==========
+
+// متغير لتتبع حالة التثبيت
+let isAppInstalled = false;
+
+// التحقق من حالة التثبيت
+function checkInstallState() {
+    // التحقق من وجود كائن Navigator.standalone (iOS)
+    if (window.navigator.standalone === true) {
+        isAppInstalled = true;
+        return;
+    }
+    
+    // التحقق من display-mode (Android)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        isAppInstalled = true;
+        return;
+    }
+    
+    // التحقق من وجود تطبيق مثبت عبر PWA
+    if (document.referrer.includes('android-app://')) {
+        isAppInstalled = true;
+        return;
+    }
+    
+    // التحقق من localStorage (إذا قمت بتخزين حالة التثبيت)
+    if (localStorage.getItem('dentavio_pwa_installed') === 'true') {
+        isAppInstalled = true;
+        return;
+    }
+    
+    isAppInstalled = false;
+}
+
+// إنشاء وإضافة زر التثبيت
+function createInstallButton() {
+    checkInstallState();
+    
+    // إذا كان التطبيق مثبت بالفعل، لا نظهر الزر
+    if (isAppInstalled) {
+        return;
+    }
+    
+    // التحقق من عدم وجود الزر بالفعل
+    if (document.getElementById('installAppBtn')) {
+        return;
+    }
+    
+    // إنشاء زر التثبيت
+    const installBtn = document.createElement('button');
+    installBtn.id = 'installAppBtn';
+    installBtn.className = 'install-app-btn';
+    installBtn.innerHTML = `
+        <i class="fas fa-download"></i>
+        <span>تثبيت التطبيق</span>
+    `;
+    
+    // إضافة الزر أسفل القائمة الجانبية
+    const sidebar = document.getElementById('sidebar');
+    const sidebarActions = document.querySelector('.sidebar-actions');
+    
+    if (sidebar && sidebarActions) {
+        // إدراج الزر بعد زر مشاركة الموقع
+        sidebarActions.after(installBtn);
+    }
+    
+    // إضافة حدث النقر
+    installBtn.addEventListener('click', handleInstallClick);
+}
+
+// متغير لتخزين حدث beforeinstallprompt
+let deferredPrompt;
+
+// الاستماع لحدث beforeinstallprompt
+window.addEventListener('beforeinstallprompt', (e) => {
+    // منع ظهور النافذة المنبثقة التلقائية
+    e.preventDefault();
+    // حفظ الحدث لاستخدامه لاحقاً
+    deferredPrompt = e;
+    
+    // إظهار زر التثبيت
+    createInstallButton();
+    
+    // تحديث النص ليكون أكثر وضوحاً
+    const installBtn = document.getElementById('installAppBtn');
+    if (installBtn) {
+        installBtn.innerHTML = `
+            <i class="fas fa-download"></i>
+            <span>تثبيت التطبيق الآن</span>
+        `;
+    }
+});
+
+// معالجة النقر على زر التثبيت
+async function handleInstallClick() {
+    const installBtn = document.getElementById('installAppBtn');
+    
+    if (deferredPrompt) {
+        // إظهار نافذة التثبيت الأصلية
+        try {
+            await deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                // تم التثبيت بنجاح
+                isAppInstalled = true;
+                localStorage.setItem('dentavio_pwa_installed', 'true');
+                showToast('✅ تم تثبيت التطبيق بنجاح!', 'success');
+                
+                // إخفاء الزر
+                if (installBtn) {
+                    installBtn.style.display = 'none';
+                }
+            } else {
+                // تم رفض التثبيت
+                showToast('لم يتم تثبيت التطبيق. يمكنك المحاولة مرة أخرى لاحقاً', 'warning');
+            }
+            
+            deferredPrompt = null;
+        } catch (error) {
+            console.error('Error during installation:', error);
+            showFallbackInstructions();
+        }
+    } else {
+        // إذا لم يكن هناك حدث beforeinstallprompt (متصفح لا يدعم)
+        showFallbackInstructions();
+    }
+}
+
+// إظهار تعليمات بديلة للتثبيت
+function showFallbackInstructions() {
+    const installBtn = document.getElementById('installAppBtn');
+    
+    if (installBtn) {
+        installBtn.innerHTML = `
+            <i class="fas fa-question-circle"></i>
+            <span>كيفية التثبيت</span>
+        `;
+        
+        // إزالة الحدث القديم وإضافة حدث جديد
+        installBtn.removeEventListener('click', handleInstallClick);
+        installBtn.addEventListener('click', showInstallGuide);
+    }
+}
+
+// إظهار دليل التثبيت
+function showInstallGuide() {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    const isChrome = /Chrome/.test(navigator.userAgent);
+    
+    let guideMessage = '';
+    
+    if (isIOS) {
+        guideMessage = `
+            📱 <strong>لتثبيت التطبيق على iOS:</strong>
+            <br>1. اضغط على زر المشاركة <i class="fas fa-share"></i> في المتصفح
+            <br>2. اختر "إضافة إلى الشاشة الرئيسية"
+            <br>3. اضغط "إضافة"
+        `;
+    } else if (isAndroid && isChrome) {
+        guideMessage = `
+            📱 <strong>لتثبيت التطبيق على Android:</strong>
+            <br>1. اضغط على ⋮ (القائمة) في المتصفح
+            <br>2. اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية"
+            <br>3. اضغط "تثبيت"
+        `;
+    } else {
+        guideMessage = `
+            💡 <strong>لتثبيت التطبيق:</strong>
+            <br>1. افتح قائمة المتصفح
+            <br>2. ابحث عن خيار "تثبيت" أو "إضافة إلى الشاشة الرئيسية"
+        `;
+    }
+    
+    // إنشاء مودال بسيط للتعليمات
+    const guideModal = document.createElement('div');
+    guideModal.className = 'install-guide-overlay';
+    guideModal.innerHTML = `
+        <div class="install-guide-content">
+            <button class="guide-close-btn">&times;</button>
+            <div class="guide-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            <div class="guide-text">
+                ${guideMessage}
+            </div>
+            <button class="btn btn-primary guide-ok-btn">حسناً، فهمت</button>
+        </div>
+    `;
+    
+    document.body.appendChild(guideModal);
+    
+    // إضافة أحداث الإغلاق
+    guideModal.querySelector('.guide-close-btn').addEventListener('click', () => {
+        guideModal.remove();
+    });
+    
+    guideModal.querySelector('.guide-ok-btn').addEventListener('click', () => {
+        guideModal.remove();
+    });
+    
+    guideModal.addEventListener('click', (e) => {
+        if (e.target === guideModal) {
+            guideModal.remove();
+        }
+    });
+}
+
+// التحقق من التثبيت عند التحميل
+window.addEventListener('appinstalled', () => {
+    isAppInstalled = true;
+    localStorage.setItem('dentavio_pwa_installed', 'true');
+    
+    // إخفاء زر التثبيت
+    const installBtn = document.getElementById('installAppBtn');
+    if (installBtn) {
+        installBtn.style.display = 'none';
+    }
+    
+    console.log('✅ تم تثبيت التطبيق بنجاح');
+});
+
+// إنشاء الزر عند تحميل الصفحة
+window.addEventListener('load', () => {
+    // تأخير قليل للتأكد من تحميل كل شيء
+    setTimeout(createInstallButton, 1000);
+});
+
+// التحقق عند تغيير حالة الاتصال (احتمال تثبيت جديد)
+window.addEventListener('online', () => {
+    setTimeout(createInstallButton, 500);
+});
 </script>
 <!-- مودال الفاتورة -->
 <div class="modal invoice-modal" id="invoiceModal">
