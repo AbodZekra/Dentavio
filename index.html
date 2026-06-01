@@ -118,6 +118,16 @@
                     <input type="number" id="maxPrice" placeholder="الحد الأعلى" step="100">
                 </div>
             </div>
+
+            <div class="filter-group search-group">
+                <label><i class="fas fa-search"></i> البحث عن منتج</label>
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="ابحث عن منتج..." class="search-input">
+                    <button class="search-clear-btn" id="clearSearchBtn" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
             <div class="filter-actions">
                 <button class="btn btn-primary" id="applyFilters">
                     <i class="fas fa-search"></i> تطبيق
@@ -1162,42 +1172,57 @@ function applyFilters() {
     const category = document.getElementById('categoryFilter').value;
     const min = parseFloat(document.getElementById('minPrice').value) || 0;
     const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+    const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     
     let filtered = [...products];
+    
+    // ✅ فلترة حسب البحث النصي (تطبق أولاً)
+    if (searchTerm) {
+        filtered = filtered.filter(p => {
+            // البحث في اسم المنتج
+            if (p.name.toLowerCase().includes(searchTerm)) return true;
+            
+            // البحث في وصف المنتج
+            if (p.description && p.description.toLowerCase().includes(searchTerm)) return true;
+            
+            // البحث في تصنيف المنتج
+            if (getCategoryName(p.category).toLowerCase().includes(searchTerm)) return true;
+            
+            // البحث في المميزات
+            if (p.features && p.features.some(f => f.toLowerCase().includes(searchTerm))) return true;
+            
+            return false;
+        });
+        
+        // إذا لم توجد نتائج للبحث
+        if (filtered.length === 0) {
+            showToast(`لا توجد منتجات تطابق بحثك عن "${searchTerm}"`, 'warning');
+        }
+    }
     
     // فلترة حسب التصنيف
     if (category !== 'all') {
         filtered = filtered.filter(p => p.category === category);
     }
     
-    // فلترة حسب السعر (فقط للمنتجات التي لها سعر رقمي)
+    // فلترة حسب السعر
     filtered = filtered.filter(p => {
-        // تجاهل المنتجات التي ليس لها سعر رقمي (priceOnRequest = true)
         if (p.priceOnRequest === true) {
-            // إذا كان المستخدم يبحث بفلتر سعر، لا نستبعدها بل نعتبرها ضمن النطاق
-            // أو نستبعدها حسب ما تريد
-            return true; // نعرضها دائماً في الفلترة
+            return true;
         }
-        
-        // استخراج الرقم من السعر
         let priceNum = parseFloat(p.price.replace(/[^0-9.-]/g, ''));
-        
-        // إذا فشل التحويل، نعتبرها ضمن النطاق
         if (isNaN(priceNum)) {
             return true;
         }
-        
         return priceNum >= min && priceNum <= max;
     });
     
     saveFilterState();
-    // عرض النتائج
-    if (filtered.length === 0 && category !== 'all') {
+    
+    if (filtered.length === 0 && category !== 'all' && !searchTerm) {
         showToast(`لا توجد منتجات في تصنيف ${getCategoryName(category)}`, 'warning');
     }
     
-    // renderProducts(shuffleArray(filtered));عشوائي
-
     renderProducts(filtered);
 }
 
@@ -1205,9 +1230,10 @@ function resetFilters() {
     document.getElementById('categoryFilter').value = 'all';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
+    document.getElementById('searchInput').value = ''; // ✅ أضف هذا
+    document.getElementById('clearSearchBtn').style.display = 'none'; // ✅ أضف هذا
     localStorage.removeItem(FILTER_STATE_KEY);
     
-    // عرض جميع المنتجات
     renderProducts([...products]);
     showToast('تم إعادة تعيين جميع الفلاتر', 'info');
 }
@@ -1222,6 +1248,7 @@ function saveFilterState() {
         category: document.getElementById('categoryFilter')?.value || 'all',
         minPrice: document.getElementById('minPrice')?.value || '',
         maxPrice: document.getElementById('maxPrice')?.value || '',
+        searchTerm: document.getElementById('searchInput')?.value || '', // ✅ أضف هذا
         timestamp: Date.now()
     };
     localStorage.setItem(FILTER_STATE_KEY, JSON.stringify(filterState));
@@ -1234,14 +1261,15 @@ function loadFilterState() {
         try {
             const filterState = JSON.parse(saved);
             
-            // استعادة القيم في الحقول
             const categoryFilter = document.getElementById('categoryFilter');
             const minPrice = document.getElementById('minPrice');
             const maxPrice = document.getElementById('maxPrice');
+            const searchInput = document.getElementById('searchInput'); // ✅ أضف هذا
             
             if (categoryFilter) categoryFilter.value = filterState.category || 'all';
             if (minPrice) minPrice.value = filterState.minPrice || '';
             if (maxPrice) maxPrice.value = filterState.maxPrice || '';
+            if (searchInput) searchInput.value = filterState.searchTerm || ''; // ✅ أضف هذا
             
             return filterState;
         } catch (e) {
@@ -1271,11 +1299,10 @@ function resetFilters() {
     document.getElementById('categoryFilter').value = 'all';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
-    
-    // حذف حالة الفلترة المحفوظة
+    document.getElementById('searchInput').value = ''; // ✅ أضف هذا
+    document.getElementById('clearSearchBtn').style.display = 'none'; // ✅ أضف هذا
     localStorage.removeItem(FILTER_STATE_KEY);
     
-    // عرض جميع المنتجات بترتيبها الأصلي
     renderProducts([...products]);
     showToast('تم إعادة تعيين جميع الفلاتر', 'info');
 }
@@ -2480,6 +2507,49 @@ phoneFields.forEach(field => {
             }, 100);
         }
     }, { passive: true });
+
+    // ========== أحداث البحث ==========
+const searchInput = document.getElementById('searchInput');
+const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+if (searchInput) {
+    // البحث أثناء الكتابة (مع تأخير debounce)
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        const value = e.target.value;
+        
+        // إظهار/إخفاء زر المسح
+        if (clearSearchBtn) {
+            clearSearchBtn.style.display = value ? 'flex' : 'none';
+        }
+        
+        // تطبيق البحث مع تأخير 500ms لتحسين الأداء
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            applyFilters();
+        }, 500);
+    });
+    
+    // البحث عند الضغط على Enter
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            clearTimeout(searchTimeout);
+            applyFilters();
+        }
+    });
+}
+
+// زر مسح البحث
+if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+        if (searchInput) {
+            searchInput.value = '';
+            clearSearchBtn.style.display = 'none';
+            searchInput.focus();
+            applyFilters();
+        }
+    });
+}
 }
     // معالجة نموذج التواصل
 async function sendContactMessage(formData) {
@@ -2881,6 +2951,7 @@ function showInstallGuide() {
     } else if (isAndroid && isChrome) {
         guideMessage = `
             📱 <strong>لتثبيت التطبيق على Android:</strong>
+            <br>إذا لم يكن التطبيق مثبتا بالفعل 
             <br>1. اضغط على ⋮ (القائمة) في المتصفح
             <br>2. اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية"
             <br>3. اضغط "تثبيت"
