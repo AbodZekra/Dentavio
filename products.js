@@ -849,21 +849,21 @@ const products = [
         id: 84,
         name: "أجهزة أشعة من شركة وييد بيكر",
         category: "devices",
-        price: "1600 $",
+        price: "1900 $",
         description: "أجهزة أشعة من شركة وييد بيكر كاميرا AiRi_x أحدث إصدار   + سينسور مقاس 1.5  2",
         features: ["سينسور 1.5 كفالة عامين ","الكاميرا AiRi_x  كفالة عام"],
         images: ["./imgprodects/prodect84.jpeg","./imgprodects/prodect85.jpeg","./imgprodects/prodect86.jpeg"]
     },
 
-                                {
-        id: 87,
-        name: "سينسور مقاس 1 + كاميرا من شركة سنتيم",
-        category: "devices",
-        price: "1225 $",
-        description: "",
-        features: [""],
-        images: ["./imgprodects/prodect87.jpeg","./imgprodects/prodect88.jpeg","./imgprodects/prodect89.jpeg"]
-    },
+    //                             {
+    //     id: 87,
+    //     name: "سينسور مقاس 1 + كاميرا من شركة سنتيم",
+    //     category: "devices",
+    //     price: "1225 $",
+    //     description: "",
+    //     features: [""],
+    //     images: ["./imgprodects/prodect87.jpeg","./imgprodects/prodect88.jpeg","./imgprodects/prodect89.jpeg"]
+    // },
 
 
                                 {
